@@ -24,14 +24,13 @@ import { consoleBuildInfo } from 'vue-cli-plugin-build-info/plugin'
 import VueFormGenerator from 'vue-form-generator'
 import 'vue-form-generator/dist/vfg.css'
 import Tabs from 'vue-tabs-with-active-line'
-import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 import VueFileAgent from 'vue-file-agent'
 import Count from '../components/count/count'
 import koolreport from '../components/koolreport'
 import topPDF from '../components/pdf-viewer/topPDF'
 import bottomPDF from '../components/pdf-viewer/bottomPDF'
-import Pdf from "../components/pdf-viewer/pdf"
-import ExcelToCsv from "../components/excel/index"
+import Pdf from '../components/pdf-viewer/pdf'
+import ExcelToCsv from '../components/excel/index'
 import chart from '../components/chart/chart'
 import barChart from '../components/chart/barChart'
 import VueFileAgentStyles from 'vue-file-agent/dist/vue-file-agent.css'
@@ -39,8 +38,6 @@ import Multiselect from 'vue-multiselect'
 import 'vue-multiselect/dist/vue-multiselect.min.css'
 
 import pdf from 'vue-pdf'
-import 'bootstrap/dist/css/bootstrap.css'
-import 'bootstrap-vue/dist/bootstrap-vue.css'
 import { VueEditor, Quill } from 'vue2-editor'
 import Datepicker from 'vuejs-datepicker'
 import { ToggleButton } from 'vue-js-toggle-button'
@@ -59,6 +56,12 @@ import 'vue2-perfect-scrollbar/dist/vue2-perfect-scrollbar.css'
 import VueApexCharts from 'vue-apexcharts'
 import VfgCustomTacInput from '../pages/component/VfgCustomTacInput.vue'
 
+
+import 'static/src/css/bootstrap.min.css'
+import 'static/src/css/style.css'
+import 'static/src/scss'
+import 'static/src/lib'
+
 import axios from 'axios'
 import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
@@ -75,7 +78,7 @@ Vue.component('Count', Count)
 Vue.component('koolreport', koolreport)
 Vue.component('chart', chart)
 Vue.component('barChart', barChart)
-Vue.component('Pdf',Pdf)
+Vue.component('Pdf', Pdf)
 Vue.component('topPDF', topPDF)
 Vue.component('bottomPDF', bottomPDF)
 Vue.component('field-vfg-functional-date', VfgFunctionalDate)
@@ -101,10 +104,6 @@ Vue.use($)
 Vue.component(Tabs)
 
 Vue.use(VueFormGenerator)
-// Make BootstrapVue available throughout your project
-Vue.use(BootstrapVue)
-// Optionally install the BootstrapVue icon components plugin
-Vue.use(IconsPlugin)
 
 Vue.use(ColorThemePlugin, {
   // override colors here.

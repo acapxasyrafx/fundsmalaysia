@@ -10,9 +10,7 @@
         class="navbar navbar-expand-lg navbar-light px-4 px-lg-5 py-3 py-lg-0"
       >
         <a href="" class="navbar-brand p-0">
-          <h1 class="m-0">
-            <i class="fa fa-search me-2"></i
-            ><span class="fs-5">FMS Website</span>
+          <h1 class="m-0"><span class="fs-5">Funds Malaysia</span>
           </h1>
           <!-- <img src="img/logo.png" alt="Logo"> -->
         </a>
@@ -27,9 +25,9 @@
         <div class="collapse navbar-collapse" id="navbarCollapse">
           <div class="navbar-nav ms-auto py-0">
             <a href="index.html" class="nav-item nav-link active">Home</a>
+            <a href="project.html" class="nav-item nav-link">Fund Status Check</a>
+            <a href="service.html" class="nav-item nav-link">New Fund Launch</a>
             <a href="about.html" class="nav-item nav-link">About</a>
-            <a href="service.html" class="nav-item nav-link">Service</a>
-            <a href="project.html" class="nav-item nav-link">Project</a>
             <div class="nav-item dropdown">
               <a
                 href="#"
