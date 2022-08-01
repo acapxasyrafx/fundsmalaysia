@@ -10,7 +10,7 @@
         class="navbar navbar-expand-lg navbar-light px-4 px-lg-5 py-3 py-lg-0"
       >
         <a href="" class="navbar-brand p-0">
-          <h1 class="m-0"><span class="fs-5">Funds Malaysia</span>
+          <h1 class="m-0"><span class="fs-5"><router-link to="/dashboard">Funds Malaysia</router-link></span>
           </h1>
           <!-- <img src="img/logo.png" alt="Logo"> -->
         </a>
@@ -24,32 +24,12 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
           <div class="navbar-nav ms-auto py-0">
-            <a href="index.html" class="nav-item nav-link active">Home</a>
-            <a href="project.html" class="nav-item nav-link">Fund Status Check</a>
-            <a href="service.html" class="nav-item nav-link">New Fund Launch</a>
-            <a href="about.html" class="nav-item nav-link">About</a>
-            <div class="nav-item dropdown">
-              <a
-                href="#"
-                class="nav-link dropdown-toggle"
-                data-bs-toggle="dropdown"
-                >Pages</a
-              >
-              <div class="dropdown-menu m-0">
-                <a href="team.html" class="dropdown-item">Our Team</a>
-                <a href="testimonial.html" class="dropdown-item">Testimonial</a>
-                <a href="404.html" class="dropdown-item">404 Page</a>
-              </div>
-            </div>
-            <a href="contact.html" class="nav-item nav-link">Contact</a>
+            <a href="" class="nav-item nav-link active"><router-link to="/dashboard">Home</router-link></a>
+            <a href="" class="nav-item nav-link"><router-link to="/fundStatusCheck">Fund Status Check</router-link></a>
+            <a href="" class="nav-item nav-link"><router-link to="/newFundLaunch">New Fund Launch</router-link></a>
+            <a href="" class="nav-item nav-link"><router-link to="/aboutUs">About</router-link></a>
           </div>
-          <butaton
-            type="button"
-            class="btn text-secondary ms-3"
-            data-bs-toggle="modal"
-            data-bs-target="#searchModal"
-            ><i class="fa fa-search"></i
-          ></butaton>
+          <a href="https://htmlcodex.com/startup-company-website-template" class="btn btn-secondary text-light rounded-pill py-2 px-4 ms-3">Sign-In or Sign-Up</a>
         </div>
       </nav>
     </div>
@@ -64,6 +44,9 @@
           role="main"
         >
           <router-view />
+          <div class="container-fluid bg-primary text-light footer mt-5 pt-5 wow fadeIn" data-wow-delay="0.1s">
+            <AppFooter></AppFooter>
+          </div>
         </main>
       </div>
     </div>
@@ -71,55 +54,53 @@
 </template>
 
 <script>
-import AppPageLayout from "./AppPageLayout";
-import AppNavbar from "./app-navbar/AppNavbar";
-import AppTopbar from "./app-topbar/AppTopbar";
-import AppSidebar from "./app-sidebar/AppSidebar";
-import { originalTheme, corporateTheme } from "vuestic-ui/src/services/themes";
+import AppPageLayout from './AppPageLayout'
+import AppNavbar from './app-navbar/AppNavbar'
+import AppTopbar from './app-topbar/AppTopbar'
+import AppSidebar from './app-sidebar/AppSidebar'
+import AppFooter from './app-footer/AppFooter'
+import { originalTheme, corporateTheme } from 'vuestic-ui/src/services/themes'
 import {
   ColorThemeActionsMixin,
-  ColorThemeMixin
-} from "../../services/vuestic-ui";
+  ColorThemeMixin,
+} from '../../services/vuestic-ui'
 
 export default {
   props: {},
-  name: "app-layout",
+  name: 'app-layout',
   components: {
     AppPageLayout,
-    AppNavbar,
-    AppTopbar,
-    AppSidebar
+    AppFooter,
   },
-  data() {
+  data () {
     return {
       isTopBar: false,
       minimized: false,
-      mobileWidth: 767
-    };
-  },
-  inject: ["contextConfig"],
-  mixins: [ColorThemeActionsMixin, ColorThemeMixin],
-  created() {
-    if (this.$route.query && this.$route.query.theme === "corporate") {
-      this.setTheme("corporate");
+      mobileWidth: 767,
     }
-    this.$root.$on("change-theme", this.setTheme);
   },
-  beforeDestroy() {
-    this.$root.$off("change-theme", this.setTheme);
+  inject: ['contextConfig'],
+  mixins: [ColorThemeActionsMixin, ColorThemeMixin],
+  created () {
+    if (this.$route.query && this.$route.query.theme === 'corporate') {
+      this.setTheme('corporate')
+    }
+    this.$root.$on('change-theme', this.setTheme)
+  },
+  beforeDestroy () {
+    this.$root.$off('change-theme', this.setTheme)
   },
   methods: {
-    setTheme(themeName) {
-      const theme = themeName === "corporate" ? corporateTheme : originalTheme;
-      this.setColors(theme.colors);
+    setTheme (themeName) {
+      const theme = themeName === 'corporate' ? corporateTheme : originalTheme
+      this.setColors(theme.colors)
       Object.keys(theme.context).forEach(key => {
-        this.contextConfig[key] = theme.context[key];
-      });
-    }
-  }
-};
+        this.contextConfig[key] = theme.context[key]
+      })
+    },
+  },
+}
 </script>
-
 <style lang="scss">
 .app-layout {
   display: flex;

@@ -1,13 +1,13 @@
 <template>
   <div>
-    <b-card>
+    <div class="container-xxl bg-white p-0">
       <div class="container-xxl py-5 bg-primary hero-header mb-5">
         <div class="container my-5 py-5 px-lg-5">
           <div class="row g-5 py-5">
             <div class="col-lg-6 text-center text-lg-start">
-              <h1 class="text-white mb-4 animated zoomIn">Welcome To Funds Malaysia</h1>
-              <p class="text-white pb-3 animated zoomIn">Tempor rebum no at dolore lorem clita rebum rebum ipsum rebum stet dolor sed justo kasd. Ut dolor sed magna dolor sea diam. Sit diam sit justo amet ipsum vero ipsum clita lorem</p>
-              <a href="" class="btn btn-outline-light py-sm-3 px-sm-5 rounded-pill animated slideInRight">Contact Us</a>
+              <h1 class="text-white mb-4 animate__animated animate__zoomIn">Welcome To Funds Malaysia</h1>
+              <p class="text-white pb-3 animate__animated animate__zoomIn">Tempor rebum no at dolore lorem clita rebum rebum ipsum rebum stet dolor sed justo kasd. Ut dolor sed magna dolor sea diam. Sit diam sit justo amet ipsum vero ipsum clita lorem</p>
+              <a href="" class="btn btn-outline-light py-sm-3 px-sm-5 rounded-pill animate__animated animate__slideInRight">Contact Us</a>
             </div>
             <div class="col-lg-6 text-center text-lg-start">
               <img class="img-fluid" src="./img/hero.png" alt="">
@@ -15,7 +15,7 @@
           </div>
         </div>
       </div>
-    </b-card>
+    </div>
   </div>
 </template>
 
@@ -334,6 +334,6 @@ export default {
 }
 
 .app-layout__main {
-  background: #e8e8e8;
+  background: transparent;
 }
 </style>

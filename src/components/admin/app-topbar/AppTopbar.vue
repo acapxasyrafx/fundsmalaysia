@@ -29,7 +29,7 @@
                 href="#"
                 class="nav-link dropdown-toggle"
                 data-bs-toggle="dropdown"
-                >Pages</a
+              >Pages</a
               >
               <div class="dropdown-menu m-0">
                 <a href="team.html" class="dropdown-item">Our Team</a>
@@ -44,12 +44,12 @@
             class="btn text-secondary ms-3"
             data-bs-toggle="modal"
             data-bs-target="#searchModal"
-            ><i class="fa fa-search"></i
+          ><i class="fa fa-search"></i
           ></butaton>
           <a
             href="https://htmlcodex.com/startup-company-website-template"
             class="btn btn-secondary text-light rounded-pill py-2 px-4 ms-3"
-            >Pro Version</a
+          >Pro Version</a
           >
         </div>
       </nav>
@@ -58,23 +58,23 @@
         <div class="container my-5 py-5 px-lg-5">
           <div class="row g-5 py-5">
             <div class="col-lg-6 text-center text-lg-start">
-              <h1 class="text-white mb-4 animated zoomIn">
+              <h1 class="text-white mb-4 animate__animated animate__zoomIn">
                 All in one SEO tool need to grow your business rapidly
               </h1>
-              <p class="text-white pb-3 animated zoomIn">
+              <p class="text-white pb-3 animate__animated animate__zoomIn">
                 Tempor rebum no at dolore lorem clita rebum rebum ipsum rebum
                 stet dolor sed justo kasd. Ut dolor sed magna dolor sea diam.
                 Sit diam sit justo amet ipsum vero ipsum clita lorem
               </p>
               <a
                 href=""
-                class="btn btn-light py-sm-3 px-sm-5 rounded-pill me-3 animated slideInLeft"
-                >Free Quote</a
+                class="btn btn-light py-sm-3 px-sm-5 rounded-pill me-3 animate__animated animate__slideInLeft"
+              >Free Quote</a
               >
               <a
                 href=""
-                class="btn btn-outline-light py-sm-3 px-sm-5 rounded-pill animated slideInRight"
-                >Contact Us</a
+                class="btn btn-outline-light py-sm-3 px-sm-5 rounded-pill animate__animated animate__slideInRight"
+              >Contact Us</a
               >
             </div>
             <div class="col-lg-6 text-center text-lg-start">
@@ -88,47 +88,41 @@
 </template>
 
 <script>
-import AppTopbarLink from "./components/AppTopbarLink";
-import AppTopbarLinkGroup from "./components/AppTopbarLinkGroup";
-import AppTopbarLinkGroupItem from "./components/AppTopbarLinkGroupItem";
-import { navigationRoutes } from "../app-sidebar/NavigationRoutes";
-import { ColorThemeMixin } from "../../../services/vuestic-ui";
+import { navigationRoutes } from '../app-sidebar/NavigationRoutes'
+import { ColorThemeMixin } from '../../../services/vuestic-ui'
 
 export default {
-  name: "app-topbar",
+  name: 'app-topbar',
   mixins: [ColorThemeMixin],
-  inject: ["contextConfig"],
+  inject: ['contextConfig'],
   components: {
-    AppTopbarLink,
-    AppTopbarLinkGroup,
-    AppTopbarLinkGroupItem
   },
   props: {},
   computed: {
-    computedStyles() {
+    computedStyles () {
       if (this.contextConfig.invertedColor) {
         return {
-          backgroundColor: "white",
-          boxShadow: "0 2px 3px 0 rgba(52, 56, 85, 0.25)"
-        };
+          backgroundColor: 'white',
+          boxShadow: '0 2px 3px 0 rgba(52, 56, 85, 0.25)',
+        }
       }
 
       return {
-        backgroundColor: this.$themes.secondary
-      };
-    }
+        backgroundColor: this.$themes.secondary,
+      }
+    },
   },
-  data() {
+  data () {
     return {
-      items: navigationRoutes.routes
-    };
+      items: navigationRoutes.routes,
+    }
   },
   methods: {
-    hasActiveByDefault(item) {
-      return item.children.some(child => child.name === this.$route.name);
-    }
-  }
-};
+    hasActiveByDefault (item) {
+      return item.children.some(child => child.name === this.$route.name)
+    },
+  },
+}
 </script>
 
 <style lang="scss">

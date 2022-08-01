@@ -19,7 +19,7 @@ export default new Router({
     ...demoRoutes,
     {
       path: '*',
-      redirect: { name: 'dashboard' },
+      redirect: { name: '/' },
       meta: {
         progress: {
           func: [
@@ -102,7 +102,7 @@ export default new Router({
     /* ---------------ADMIN PAGES--------------------- */
     {
       name: 'Admin',
-      path: '/fimm',
+      path: '/',
       component: AppLayout,
       meta: {
         progress: {
@@ -133,7 +133,24 @@ export default new Router({
           import('../components/dashboard/Dashboard.vue'),
         default: true,
       },
-
+      {
+        name: 'fundStatusCheck',
+        path: 'fundStatusCheck',
+        component: () =>
+          import('../components/fund-status-check/fundStatusCheck.vue'),
+      },
+      {
+        name: 'newFundLaunch',
+        path: 'newFundLaunch',
+        component: () =>
+          import('../components/new-fund-launch/newFundLaunch.vue'),
+      },
+      {
+        name: 'aboutUs',
+        path: 'aboutUs',
+        component: () =>
+          import('../components/about-us/aboutUs.vue'),
+      },
       {
         name: 'ui',
         path: 'ui',

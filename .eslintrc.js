@@ -25,5 +25,7 @@ module.exports = {
   },
   globals: {
     'workbox': 'readonly',
+    "$": true,
+    "jQuery": true,
   },
 }

@@ -56,11 +56,9 @@ import 'vue2-perfect-scrollbar/dist/vue2-perfect-scrollbar.css'
 import VueApexCharts from 'vue-apexcharts'
 import VfgCustomTacInput from '../pages/component/VfgCustomTacInput.vue'
 
+import 'bootstrap/dist/css/bootstrap.min.css'
+import 'bootstrap'
 
-import 'static/src/css/bootstrap.min.css'
-import 'static/src/css/style.css'
-import 'static/src/scss'
-import 'static/src/lib'
 
 import axios from 'axios'
 import NProgress from 'nprogress'

@@ -1,9 +1,18 @@
 const path = require('path')
 const StylelintPlugin = require('stylelint-webpack-plugin')
+const webpack = require('webpack')
 
 const lintOnSave = false
 
 module.exports = {
+  plugins: [
+    new webpack.ProvidePlugin({
+      $: 'jquery',
+      jquery: 'jquery',
+      'window.jQuery': 'jquery',
+      jQuery: 'jquery',
+    }),
+  ],
   lintOnSave,
   transpileDependencies: [
     'vuestic-ui',
