@@ -19,7 +19,7 @@ export default new Router({
     ...demoRoutes,
     {
       path: '*',
-      redirect: { name: '/' },
+      redirect: { name: 'dashboard' },
       meta: {
         progress: {
           func: [

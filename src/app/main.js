@@ -48,7 +48,7 @@ import VfgFunctionalDate from '../pages/component/VfgFunctionalCalendar.vue'
 import VueTheMask from 'vue-the-mask'
 import VfgCustomInput from '../pages/component/VfgCustomInput.vue'
 
-import toast from '../components/alert/toast'
+// import toast from '../components/alert/toast'
 
 import PerfectScrollbar from 'vue2-perfect-scrollbar'
 import 'vue2-perfect-scrollbar/dist/vue2-perfect-scrollbar.css'

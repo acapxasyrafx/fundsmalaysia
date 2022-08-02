@@ -10,7 +10,7 @@
         class="navbar navbar-expand-lg navbar-light px-4 px-lg-5 py-3 py-lg-0"
       >
         <a href="" class="navbar-brand p-0">
-          <h1 class="m-0"><span class="fs-5"><router-link to="/dashboard">Funds Malaysia</router-link></span>
+          <h1 class="m-0"><span class="fs-5"><router-link to="dashboard">Funds Malaysia</router-link></span>
           </h1>
           <!-- <img src="img/logo.png" alt="Logo"> -->
         </a>
@@ -24,10 +24,10 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
           <div class="navbar-nav ms-auto py-0">
-            <a href="" class="nav-item nav-link active"><router-link to="/dashboard">Home</router-link></a>
-            <a href="" class="nav-item nav-link"><router-link to="/fundStatusCheck">Fund Status Check</router-link></a>
-            <a href="" class="nav-item nav-link"><router-link to="/newFundLaunch">New Fund Launch</router-link></a>
-            <a href="" class="nav-item nav-link"><router-link to="/aboutUs">About</router-link></a>
+            <a href="" class="nav-item nav-link active"><router-link to="dashboard">Home</router-link></a>
+            <a href="" class="nav-item nav-link"><router-link to="fundStatusCheck">Fund Status Check</router-link></a>
+            <a href="" class="nav-item nav-link"><router-link to="newFundLaunch">New Fund Launch</router-link></a>
+            <a href="" class="nav-item nav-link"><router-link to="aboutUs">About</router-link></a>
           </div>
           <a href="https://htmlcodex.com/startup-company-website-template" class="btn btn-secondary text-light rounded-pill py-2 px-4 ms-3">Sign-In or Sign-Up</a>
         </div>
