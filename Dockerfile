@@ -1,13 +1,17 @@
-FROM node:8
-
+# develop stage
+FROM node:14.18-alpine3.14 as develop-stage
 WORKDIR /app
+COPY package*.json ./
+RUN apk add --no-cache git
+RUN npm install
+RUN npm install chart.piecelabel.js
+COPY ./ .
 
-COPY . /app
+# build stage
+FROM develop-stage as build-stage
+RUN npm run build
 
-EXPOSE 8080
-
-RUN npm install http-server -g
-
-RUN npm install && npm run build
-
-CMD http-server ./dist
+FROM nginx as production-stage
+RUN mkdir /app
+COPY --from=build-stage /app/dist /app
+COPY nginx.conf /etc/nginx/nginx.conf
