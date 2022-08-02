@@ -50,64 +50,85 @@ module.exports = {
     ],
 
     devServer: {
+      disableHostCheck: true,
+      port: process.env.VUE_APP_PORT || 8081,
       proxy: {
+        '^/api/module10': {
+          target: process.env.MODULE10_URL || 'http://0.0.0.0:7010',
+          ws: true,
+          changeOrigin: true,
+          secure: false,
+        },
         // '^/api/koolreport': {
         //   target: 'http://localhost:7008',
         //   ws: true,
         //   changeOrigin: true,
         //   secure: false,
         // },
+        // public: 'lfcs-stg.fimm.com.my',
+        // disableHostCheck: true,
         '^/api/module0': {
-          target: 'http://localhost:7000',
+          target: process.env.MODULE0_URL || 'http://0.0.0.0:7000',
           ws: true,
           changeOrigin: true,
           secure: false,
         },
         '^/api/module1': {
-          target: 'http://localhost:7001',
+          target: process.env.MODULE1_URL || 'http://0.0.0.0:7001',
           ws: true,
           changeOrigin: true,
           secure: false,
         },
         '^/api/module2': {
-          target: 'http://localhost:7002',
+          target: process.env.MODULE2_URL || 'http://0.0.0.0:7002',
           ws: true,
           changeOrigin: true,
           secure: false,
         },
         '^/api/module3': {
-          target: 'http://localhost:7003',
+          target: process.env.MODULE3_URL || 'http://0.0.0.0:7003',
           ws: true,
           changeOrigin: true,
           secure: false,
         },
         '^/api/module4': {
-          target: 'http://localhost:7004',
+          target: process.env.MODULE4_URL || 'http://0.0.0.0:7004',
           ws: true,
           changeOrigin: true,
           secure: false,
         },
         '^/api/module5': {
-          target: 'http://localhost:7005',
+          target: process.env.MODULE5_URL || 'http://0.0.0.0:7005',
           ws: true,
           changeOrigin: true,
           secure: false,
         },
         '^/api/module6': {
-          target: 'http://localhost:7006',
+          target: process.env.MODULE6_URL || 'http://0.0.0.0:7006',
           ws: true,
           changeOrigin: true,
           secure: false,
         },
         '^/api/module7': {
-          target: 'http://localhost:7007',
+          target: process.env.MODULE7_URL || 'http://0.0.0.0:7007',
           ws: true,
           changeOrigin: true,
           secure: false,
         },
-
-        '^/token': {
-          target: 'http://v.irc.my:8057/auth/realms/ldap-realm/protocol/openid-connect',
+        'api/ems': {
+          target: process.env.EMS_URL || 'https://ems-stg.fimm.com.my/api',
+          ws: true,
+          changeOrigin: true,
+          secure: false,
+        },
+        '^/api/module9': {
+          target: process.env.MODULE9_URL || 'http://0.0.0.0:7009',
+          ws: true,
+          changeOrigin: true,
+          secure: false,
+        },
+        '^/api/module11': {
+          target: process.env.MODULE11 || 'http://0.0.0.0:7011',
           ws: true,
           changeOrigin: true,
           secure: false,
