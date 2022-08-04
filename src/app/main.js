@@ -108,7 +108,7 @@ Vue.use(ColorThemePlugin, {
 })
 
 router.beforeEach((to, from, next) => {
-  store.commit('setLoading', true)
+  store.commit('setLoading', false)
   next()
 })
 
@@ -121,6 +121,5 @@ new Vue({
   el: '#app',
   router,
   store,
-  toast,
   render: h => h(App),
 })
