@@ -26,94 +26,164 @@
                   >
                     Search
                   </button>
-                  <button
+                  <!-- <button
                     @click="reset"
                     type="button"
                     class="ml-2 btn btn-sm btn-danger"
                   >
                     Reset
-                  </button>
+                  </button> -->
                 </div>
                 <va-separator />
                 <div>
                   <div class="col">
                     <div class="row mb-1">
                       <span class="description col-4">STATUS : </span>
-                      <span class="description col">-</span>
+                      <span class="description col">
+                        <div>
+                          {{ this.details.TS_PARAM }}
+                        </div>
+                      </span>
                     </div>
                   </div>
+                  <br/>
                   <div class="col">
                     <div class="row mb-1">
                       <span class="description col-4">LAUNCH DATE : </span>
-                      <span class="description col">-</span>
+                      <span class="description col">
+                        <div>
+                          {{ details.FUND_DATE_LAUNCH }}
+                        </div>
+                      </span>
                     </div>
                   </div>
+                  <br/>
                   <div class="col">
                     <div class="row mb-1">
                       <span class="description col-4">FUND TYPE : </span>
                       <span class="description col">
                         <div
+                          v-if="
+                            details.FUND_TYPE_FULLNAME != null &&
+                              details.FUND_TYPE_FULLNAME != ''
+                          "
+                        >
+                          {{ details.FUND_TYPE_FULLNAME }}
+                        </div>
+                        <div
+                          v-else-if="
+                            details.FUND_TYPE_FULLNAME == null ||
+                              details.FUND_TYPE_FULLNAME == ''
+                          "
                         >
                           -
                         </div>
                       </span>
                     </div>
                   </div>
+                  <br/>
                   <div class="col">
                     <div class="row mb-1">
                       <span class="description col-4">FUND CATEGORY : </span>
                       <span class="description col">
                         <div
+                          v-if="
+                            details.GROUP_ASSET != null &&
+                              details.GROUP_ASSET != ''
+                          "
+                        >
+                          {{ details.GROUP_ASSET }}
+                        </div>
+                        <div
+                          v-else-if="
+                            details.GROUP_ASSET == null ||
+                              details.GROUP_ASSET == ''
+                          "
                         >
                           -
                         </div>
                       </span>
                     </div>
                   </div>
+                  <br/>
                   <div class="col">
                     <div class="row mb-1">
                       <span class="description col-4">SHARIAH COMPLIANT : </span>
                       <span class="description col">
+                        <div v-if="details.FUND_SYARIAH_COMP == 1">Yes</div>
+                        <div v-if="details.FUND_SYARIAH_COMP == 2">No</div>
                         <div
+                          v-else-if="
+                            details.FUND_SYARIAH_COMP == null ||
+                              details.FUND_SYARIAH_COMP == ''
+                          "
                         >
                           -
                         </div>
                       </span>
                     </div>
                   </div>
+                  <br/>
                   <div class="col">
                     <div class="row mb-1">
                       <span class="description col-4">SRI/ESG FUND : </span>
                       <span class="description col">
+                        <div v-if="details.FUND_ASEAN_CIS_STATUS == 1">Yes</div>
+                        <div v-if="details.FUND_ASEAN_CIS_STATUS == 2">No</div>
                         <div
+                          v-else-if="
+                            details.FUND_ASEAN_CIS_STATUS == null ||
+                              details.FUND_ASEAN_CIS_STATUS == ''
+                          "
                         >
                           -
                         </div>
                       </span>
                     </div>
                   </div>
+                  <br/>
                   <div class="col">
                     <div class="row mb-1">
                       <span class="description col-4">EPF-MIS : </span>
                       <span class="description col">
+                        <div v-if="details.FUND_STATUS_EPF == 1">Yes</div>
+                        <div v-if="details.FUND_STATUS_EPF == 2">No</div>
                         <div
+                          v-else-if="
+                            details.FUND_STATUS_EPF == null ||
+                              details.FUND_STATUS_EPF == ''
+                          "
                         >
                           -
                         </div>
                       </span>
                     </div>
                   </div>
+                  <br/>
                   <div class="col">
                     <div class="row mb-1">
                       <span class="description col-4">SCHEME STRUCTURE : </span>
                       <span class="description col">
                         <div
+                          v-if="
+                            details.FUND_SCHEME != null &&
+                              details.FUND_SCHEME != ''
+                          "
+                        >
+                          {{ details.FMS_SCHEME_NAME }}
+                        </div>
+                        <div
+                          v-else-if="
+                            details.FUND_SCHEME == null ||
+                              details.FUND_SCHEME == ''
+                          "
                         >
                           -
                         </div>
                       </span>
                     </div>
                   </div>
+                  <br/>
                   <div class="col">
                     <div class="row mb-1">
                       <span class="description col-4">NAV : </span>
@@ -149,10 +219,12 @@
 </template>
 <script>
 import axios from 'axios'
+import * as servicesModule1 from '../../app/module1/services'
 
 export default {
   name: 'fundStatusCheck',
   mounted () {
+    this.getDistributorMedia()
   },
   data () {
     return {
@@ -262,6 +334,42 @@ export default {
     }
   },
   methods: {
+    // search: debounce (function (term) {
+    //   this.term = term
+    //   console.log(this.term)
+    // }, 400),
+    onSearch: async function () {
+      const data = this.model.DISTRIBUTOR.DISTRIBUTOR_ID
+      const data2 = this.model.FUND_NAME.FUND_PROFILE_ID
+      const response = await servicesModule1.fundDetailsMedia(data, data2)
+      console.log('before in var : ', this.details)
+      this.details = response[0]
+      console.log('after in var : ', this.details)
+    },
+    async filterNAV () {
+      try {
+        const response = await servicesModule1.getNAVlistMedia(
+          this.model.modelFilter,
+        )
+        if (response !== 'error') {
+          this.navListRecordList = response
+        }
+      } catch (error) {}
+    },
+    getNAVlist: async function () {
+      const response = await servicesModule1.getNAVlistMedia()
+      this.navListRecordList = response
+      this.navListRecordCount = this.navListRecordList.length
+    },
+    getDistributorMedia: async function () {
+      const response = await servicesModule1.getDistributorMedia()
+      this.distributor = response
+    },
+    async getFundProfileFilterData (data) {
+      console.log(data)
+      const response = await servicesModule1.getFundProfileFilter(data)
+      this.fund = response
+    },
     onModelUpdated (newVal, schema) {
       if (schema === 'DISTRIBUTOR') {
         this.model.FUND_NAME = ''
@@ -302,6 +410,27 @@ export default {
         },
       ]
     },
+    // eslint-disable-next-line vue/return-in-computed-property
+    onNewTag (newTag, id, options, value) {
+      console.log('onNewTag', newTag, id, options, value)
+    },
+    onChanged: function (model, newVal, oldVal, field) {
+      console.log(JSON.stringify(newVal, null, 2))
+    },
+    navListFilteredData () {
+      if (!this.term || this.term.length < 1) {
+        return this.navListRecordList
+      }
+      return this.navListRecordList.filter((item) => {
+        return this.term
+
+          .split(' ')
+          .every(
+            (v) => item.DIST_NAME.includes(v) || item.FUND_NAME.includes(v),
+          )
+      })
+    },
+
     formOptions: {
       validateAfterLoad: false,
       validateAfterChanged: false,
