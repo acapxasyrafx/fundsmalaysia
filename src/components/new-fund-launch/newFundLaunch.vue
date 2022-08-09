@@ -7,6 +7,28 @@
         <div class="row">
           <div class="col-sm">
             <div class="owl-carousel testimonial-carousel">
+              <div v-for="navLists in navListRecordList" :key="navLists.FUND_PROFILE_ID">
+                <div class="testimonial-item bg-transparent border rounded text-white p-4">
+                  <p>{{ navLists.FUND_NAME }}</p>
+                  <div class="d-flex align-items-center">
+                    <div class="ps-3">
+                      <h6 class="text-white mb-1">{{ navLists.DIST_NAME }}</h6>
+                      <small> {{ navLists.CURRENCY_NAME }}</small>
+                      <br/>
+                      <small>{{ navLists.NAV_CREATE_TIMESTAMP }}</small>
+                    </div>
+                  </div>
+                </div>
+                <br/>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- <div class="container">
+        <div class="row">
+          <div class="col-sm">
+            <div class="owl-carousel testimonial-carousel">
               <div class="testimonial-item bg-transparent border rounded text-white p-4">
                 <p>FUND MAYBANK B</p>
                 <div class="d-flex align-items-center">
@@ -171,8 +193,8 @@
             </div>
           </div>
         </div>
-      </div>
-      <br/>
+      </div> -->
+      <!-- <br/>
       <div>
         <va-card>
           <div>
@@ -193,7 +215,7 @@
             </template>
           </va-data-table>
         </va-card>
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
