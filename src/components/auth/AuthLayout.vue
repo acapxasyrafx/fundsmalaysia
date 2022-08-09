@@ -1,7 +1,7 @@
 <template>
   <div class="auth-layout row align-content--center">
     <div class="flex xs12 pa-3 flex-center">
-      <router-link class="py-5 flex-center" to="/">
+      <router-link class="py-5 flex-center" to="/dashboard">
         <img src="./assets/logo01.png" width="304" height="130" />
         <!-- <va-icon-vuestic /> -->
       </router-link>
@@ -27,30 +27,29 @@
 </template>
 
 <script>
-// import VaIconVuestic from '../../iconset/VaIconVuestic'
 
-const tabs = ["login", "signup"];
+const tabs = ['login', 'signup']
 
 export default {
-  name: "AuthLayout",
+  name: 'AuthLayout',
   // components: { VaIconVuestic },
-  data() {
+  data () {
     return {
       selectedTabIndex: 0,
-      tabTitles: ["login", "createNewAccount"]
-    };
+      tabTitles: ['login', 'createNewAccount'],
+    }
   },
   computed: {
     tabIndex: {
-      set(tabIndex) {
-        this.$router.push({ name: tabs[tabIndex] });
+      set (tabIndex) {
+        this.$router.push({ name: tabs[tabIndex] })
       },
-      get() {
-        return tabs.indexOf(this.$route.name);
-      }
-    }
-  }
-};
+      get () {
+        return tabs.indexOf(this.$route.name)
+      },
+    },
+  },
+}
 </script>
 
 <style lang="scss">
