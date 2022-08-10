@@ -1,5 +1,6 @@
 //
 import axios from 'axios'
+import Vue from 'vue'
 
 var urlHost = 'https://lfcs-dev.fimm.com.my'
 //* ******************* Authorization ********************/
@@ -54,6 +55,7 @@ export async function checkTokenValidation () {
 
 export function logout () {
   localStorage.removeItem('user')
+  localStorage.removeItem('realmName')
 }
 
 export async function userDetail () {

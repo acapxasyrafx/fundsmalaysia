@@ -79,7 +79,7 @@ import Vue from 'vue'
 import VueFormGenerator from 'vue-form-generator'
 import 'vue-form-generator/dist/vfg-core.css'
 // import * as servicesModule5 from '../../../app/module5/services'
-// import * as services01Module5 from '../../../app/module5/services01'
+import * as services01Module5 from '../../../app/module1/services01'
 import Vudal from 'vudal'
 Vue.use(VueFormGenerator)
 
@@ -160,7 +160,7 @@ export default {
         }
         this.showOverlay(true)
         console.log('start verify')
-        // const response = await services01Module5.verifyMediaUser(data)
+        const response = await services01Module5.verifyMediaUser(data)
         // console.log(response.data.TP_USER_TYPE);
         if (response.data.errorCode == 4010) {
           this.$router.push({ name: 'page_under_maintenance_media' })
@@ -181,7 +181,7 @@ export default {
             console.log('other else here 1')
             console.log('User Media')
             console.log(JSON.stringify(response.data))
-            // servicesModule5.setUser(JSON.stringify(response.data))
+            services01Module5.setUser(JSON.stringify(response.data))
             this.$store.commit('change', JSON.stringify(response.data))
             console.log('user store :' + localStorage.getItem('user'))
             Vue.$toast.open({
@@ -227,7 +227,7 @@ export default {
         data.append('NOTI_TITLE', 'Kindly assist to reset this account as per details below :')
 
         try {
-          // const response = await services01Module5.resetPassword(data)
+          const response = await services01Module5.resetUserPassword(data)
           this.model.emailVerify = ''
         } catch (error) {
           console.log(error)

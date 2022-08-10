@@ -1,5 +1,20 @@
 
 import axios from 'axios'
+import Vue from 'vue'
+
+export function isLoggedIn () {
+  const user = localStorage.getItem('user')
+  return user != null
+}
+
+export function setUser (user) {
+  localStorage.setItem('user', user)
+}
+
+export function logout () {
+  localStorage.removeItem('user')
+  localStorage.removeItem('realmName')
+}
 
 var urlHost = 'https://lfcs-dev.fimm.com.my'
 
@@ -255,37 +270,6 @@ export async function checkDuplicateMediaUserID (data) {
     })
 }
 
-//* ********************************************login page******************************************************** */
-
-export async function verifyMediaUser (data) {
-  return axios.get(urlHost + '/api/module5/verify_media_user', {
-    params: {
-      username: data.username,
-      USER_PASS_NUM: data.USER_PASS_NUM,
-    },
-  }).then(response => {
-    localStorage.setItem('realmName', 'realm0')
-
-    console.log(response.data)
-    return response.data
-  }).catch(function (error) {
-    if (error.response) {
-      if (error.response.status == 500) {
-        if (error.response.data.message == 'Token expired.') {
-          console.log('logout')
-          return error.response.data.message
-        } else {
-          console.log(error.response.data.message)
-          return error.response.data.message
-        }
-      } else if (error.response.status == 401) {
-        return error.response.data.message
-      }
-      return error.response
-    }
-  })
-}
-
 export async function getAllCompany () {
   return axios.get(urlHost + '/api/module5/get_company_list').then(response => {
     console.log('Company list :' + JSON.stringify(response.data.data))
@@ -325,6 +309,37 @@ export async function getUserIdSetting (isLogin) {
         // logout();
       }
       return 'error'
+    }
+  })
+}
+
+//* ********************************************login page******************************************************** */
+
+export async function verifyMediaUser (data) {
+  return axios.get(urlHost + '/api/module5/verify_media_user', {
+    params: {
+      username: data.username,
+      USER_PASS_NUM: data.USER_PASS_NUM,
+    },
+  }).then(response => {
+    localStorage.setItem('realmName', 'realm0')
+
+    console.log(response.data)
+    return response.data
+  }).catch(function (error) {
+    if (error.response) {
+      if (error.response.status === 500) {
+        if (error.response.data.message === 'Token expired.') {
+          console.log('logout')
+          return error.response.data.message
+        } else {
+          console.log(error.response.data.message)
+          return error.response.data.message
+        }
+      } else if (error.response.status === 401) {
+        return error.response.data.message
+      }
+      return error.response
     }
   })
 }

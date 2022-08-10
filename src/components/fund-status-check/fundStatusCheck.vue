@@ -5,7 +5,7 @@
         <div class="row g-5">
           <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
             <div class="section-title position-relative mb-4 pb-2">
-              <h6 class="position-relative text-primary ps-4">Fund Status Check</h6>
+              <h6 class="position-relative text-primary ps-4">Advanced Search Fund</h6>
             </div>
             <div class="row g-6">
               <div class="col-sm-12">
