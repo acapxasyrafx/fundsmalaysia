@@ -311,10 +311,135 @@ export default {
                 },
               },
               {
-                type: 'vueMultiSelect',
+                type: 'input',
                 inputType: 'text',
                 model: 'FUND_NAME',
                 label: 'Fund Name',
+              },
+              {
+                type: 'vueMultiSelect',
+                inputType: 'text',
+                model: 'FUND_NAME',
+                label: 'Launch Date',
+                placeholder: 'Select Fund',
+                selectOptions: {
+                  multiple: false,
+                  trackBy: 'FUND_PROFILE_ID',
+                  key: 'FUND_PROFILE_ID',
+                  label: 'FUND_NAME',
+                  searchable: true,
+                },
+                values: (model, schema) => {
+                  return this.fund
+                },
+              },
+              {
+                type: 'vueMultiSelect',
+                inputType: 'text',
+                model: 'FUND_NAME',
+                label: 'Fund Type',
+                placeholder: 'Select Fund',
+                selectOptions: {
+                  multiple: false,
+                  trackBy: 'FUND_PROFILE_ID',
+                  key: 'FUND_PROFILE_ID',
+                  label: 'FUND_NAME',
+                  searchable: true,
+                },
+                values: (model, schema) => {
+                  return this.fund
+                },
+              },
+              {
+                type: 'vueMultiSelect',
+                inputType: 'text',
+                model: 'FUND_NAME',
+                label: 'Fund Category',
+                placeholder: 'Select Fund',
+                selectOptions: {
+                  multiple: false,
+                  trackBy: 'FUND_PROFILE_ID',
+                  key: 'FUND_PROFILE_ID',
+                  label: 'FUND_NAME',
+                  searchable: true,
+                },
+                values: (model, schema) => {
+                  return this.fund
+                },
+              },
+              {
+                type: 'vueMultiSelect',
+                inputType: 'text',
+                model: 'FUND_NAME',
+                label: 'Fund Category',
+                placeholder: 'Select Fund',
+                selectOptions: {
+                  multiple: false,
+                  trackBy: 'FUND_PROFILE_ID',
+                  key: 'FUND_PROFILE_ID',
+                  label: 'FUND_NAME',
+                  searchable: true,
+                },
+                values: (model, schema) => {
+                  return this.fund
+                },
+              },
+              {
+                type: 'vueMultiSelect',
+                inputType: 'text',
+                model: 'FUND_NAME',
+                label: 'Shariah Compliant',
+                placeholder: 'Select Fund',
+                selectOptions: {
+                  multiple: false,
+                  trackBy: 'FUND_PROFILE_ID',
+                  key: 'FUND_PROFILE_ID',
+                  label: 'FUND_NAME',
+                  searchable: true,
+                },
+                values: (model, schema) => {
+                  return this.fund
+                },
+              },
+              {
+                type: 'vueMultiSelect',
+                inputType: 'text',
+                model: 'FUND_NAME',
+                label: 'SRI/ESG Fund',
+                placeholder: 'Select Fund',
+                selectOptions: {
+                  multiple: false,
+                  trackBy: 'FUND_PROFILE_ID',
+                  key: 'FUND_PROFILE_ID',
+                  label: 'FUND_NAME',
+                  searchable: true,
+                },
+                values: (model, schema) => {
+                  return this.fund
+                },
+              },
+              {
+                type: 'vueMultiSelect',
+                inputType: 'text',
+                model: 'FUND_NAME',
+                label: 'EPF-MIS',
+                placeholder: 'Select Fund',
+                selectOptions: {
+                  multiple: false,
+                  trackBy: 'FUND_PROFILE_ID',
+                  key: 'FUND_PROFILE_ID',
+                  label: 'FUND_NAME',
+                  searchable: true,
+                },
+                values: (model, schema) => {
+                  return this.fund
+                },
+              },
+              {
+                type: 'vueMultiSelect',
+                inputType: 'text',
+                model: 'FUND_NAME',
+                label: 'Scheme Structure',
                 placeholder: 'Select Fund',
                 selectOptions: {
                   multiple: false,

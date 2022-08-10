@@ -136,12 +136,12 @@ export default {
       this.$modals.simpleModal.$show()
     },
 
-    showOverlay: function (show) {
-      Event.$emit('signup-media:overlay', show)
-    },
+    // showOverlay: function (show) {
+    //   Event.$emit('signup-media:overlay', show)
+    // },
     onsubmit: async function () {
       this.errors = []
-      const vm = this
+      // const vm = this
       console.log(this)
       // servicesModule0.logout(); // logout first to clear cache
       // console.log(this.email);
@@ -158,7 +158,7 @@ export default {
           username: this.email,
           password: this.password,
         }
-        this.showOverlay(true)
+        // this.showOverlay(true)
         console.log('start verify')
         const response = await services01Module5.verifyMediaUser(data)
         // console.log(response.data.TP_USER_TYPE);
@@ -176,7 +176,7 @@ export default {
               name: 'media-recover-password',
               params: { USER_ID: response.data.USER_ID },
             })
-            this.showOverlay(false)
+            // this.showOverlay(false)
           } else if (response.data.ISLOGIN == 1) {
             console.log('other else here 1')
             console.log('User Media')
@@ -191,11 +191,11 @@ export default {
             })
             this.$router.push({ name: 'dashboard' })
             console.log('first')
-            this.showOverlay(false)
+            // this.showOverlay(false)
           }
         } else {
           console.log('Wrong User')
-          this.showOverlay(false)
+          // this.showOverlay(false)
 
           Vue.$toast.open({
             message: 'Unknown user',
@@ -205,7 +205,7 @@ export default {
         }
       } catch (error) {
         console.log('Error log : ', error)
-        this.showOverlay(false)
+        // this.showOverlay(false)
 
         Vue.$toast.open({
           message: 'Wrong email or password',
