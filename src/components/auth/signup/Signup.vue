@@ -35,8 +35,7 @@ import 'vue-form-generator/dist/vfg-core.css'
 import 'bootstrap/dist/css/bootstrap.css'
 import Vue from 'vue'
 // import * as services03Module5 from '../../../app/module5/services03'
-import * as services06Module0 from '../../../app/module0/services06'
-import * as services01Module5 from '../../../app/module1/services01'
+import * as services01Module1 from '../../../app/module1/services01'
 // import * as services06Module1 from '../../../app/module1/services06'
 Vue.use(VueFormGenerator)
 
@@ -178,12 +177,12 @@ export default {
       return this.$refs.regForm.validate()
     },
     async getUserIdSetting () {
-      const response = await services06Module0.getUserIdSetting(0)
+      const response = await services01Module1.getUserIdSetting(0)
       this.useridSetting = response
     },
 
     async validateEmail (value) {
-      const response = await services01Module5.checkDuplicateEmail(value)
+      const response = await services01Module1.checkDuplicateEmail(value)
       return response.message
     },
     async validateUserID (value) {
@@ -277,7 +276,7 @@ export default {
           }
         }
 
-        const response = await services01Module5.checkDuplicateMediaUserID(value)
+        const response = await services01Module1.checkDuplicateMediaUserID(value)
         if (response) {
           return response.message
         }
@@ -294,7 +293,7 @@ export default {
     },
 
     getAllCompany: async function () {
-      const response = await services01Module5.getAllCompany()
+      const response = await services01Module1.getAllCompany()
       this.companyList = response
     },
 
@@ -317,14 +316,15 @@ export default {
         data.append('NOTI_TITLE', 'Kindly assist to create new User ID as per details below :')
 
         try {
-          vm.showOverlay(true)
-          const response = await services01Module5.newUserRegistration(data)
+          // vm.showOverlay(true)
+          const response = await services01Module1.newUserRegistration(data)
+          if (response) {
+            // vm.showOverlay(false)
+            vm.showStaticModal = true
 
-          vm.showOverlay(false)
-          vm.showStaticModal = true
-
-          this.model.userId = ''
-          this.model.applicantEmail = ''
+            this.model.userId = ''
+            this.model.applicantEmail = ''
+          }
         } catch (error) {
           console.log(error)
         }
