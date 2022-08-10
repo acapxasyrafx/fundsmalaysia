@@ -1,508 +1,153 @@
 <template>
   <div>
-    <vudal name="simpleModal" class="widthModal">
-      <div class="header">
-        <i class="close icon">&times;</i>
-        <br />
-      </div>
-      <div class="">
-        <va-card>
-          <h4 slot="header" class="card-title">
-            New Media Registration Form
-          </h4>
-          <!-- <br /> -->
-          <vue-form-generator
-            :model="model"
-            :schema="schemaDistributor"
-            :options="formOptions"
-            ref="distributorForm"
-            @model-updated="onModelUpdated"
-          >
-          </vue-form-generator>
-          <br />
-          <div class="float-right">
-            <button
-              @click="submitForm"
-              type="button"
-              class="btn btn-primary btn-fill btn-md"
-            >
-              <i class="fa fa-paper-plane" /> &nbsp; Submit
-            </button>
-          </div>
-        </va-card>
-      </div>
-    </vudal>
     <va-modal
       v-model="showStaticModal"
-      title="A verification link has been sent to your email accaount"
-      cancelClass="none"
-      message="Please check on the link has just been sent to your email account to verify your email and continue the registration process"
-      noOutsideDismiss
-      noEscDismiss
+      title="Submission Has Been Sent!"
+      message="You will receive Email Verification Upon Approval By FIMM."
+      no-dismiss
+      cancel-text=""
+      ok-text="Close"
+      @ok="proceedToLogin"
     />
-    <form @submit.prevent="onsubmit()">
-      <!-- <va-select>
-      <va-select-option Text="Training Provider" />
-    </va-select> -->
-      <!-- <div class="float-left row col-4"> -->
-      <vue-form-generator
-        :model="model"
-        :schema="schema"
-        :options="formOptions"
-        ref="optionForm"
-      >
-      </vue-form-generator>
-      <!-- </div> -->
+    <va-card>
+      <form @submit.prevent="onSubmit">
+        <vue-form-generator
+          :model="model"
+          :schema="schema"
+          :options="formOptions"
+          ref="regForm"
+          @model-updated="onModelUpdated"
 
-      <!-- <va-input
-      v-model="email"
-      type="email"
-      :label="$t('auth.email')"
-      :error="!!emailErrors.length"
-      :error-messages="emailErrors"
-    />
-
-    <va-input
-      v-model="password"
-      type="password"
-      :label="$t('auth.password')"
-      :error="!!passwordErrors.length"
-      :error-messages="passwordErrors"
-    /> -->
-
-      <div class="d-flex justify--center mt-3">
-        <va-button type="submit" class="my-0">{{
-          $t("auth.sign_up")
-        }}</va-button>
-      </div>
-    </form>
+        >
+        </vue-form-generator>
+        <br />
+        <div class="d-flex justify--center mt-3">
+          <va-button type="submit" class="my-0 btncolor">Submit</va-button>
+        </div>
+      </form>
+    </va-card>
   </div>
 </template>
 
 <script>
-import Vudal from 'vudal'
 import VueFormGenerator from 'vue-form-generator'
 import 'vue-form-generator/dist/vfg-core.css'
 import 'bootstrap/dist/css/bootstrap.css'
 import Vue from 'vue'
-import * as servicesModule0 from '../../../app/module0/services'
+// import * as services03Module5 from '../../../app/module5/services03'
+import * as services06Module0 from '../../../app/module0/services06'
+import * as services01Module5 from '../../../app/module1/services01'
+// import * as services06Module1 from '../../../app/module1/services06'
 Vue.use(VueFormGenerator)
+
 export default {
-  components: {
-    Vudal,
-  },
-  name: 'signup',
+  name: 'signup-media',
   mounted () {
-    this.getAllPostal()
-    this.getCountry()
+    this.getAllCompany()
+    this.getUserIdSetting()
+    this.showStaticModal = false
   },
   data () {
     return {
-      showStaticModal: false,
-      timestamp: '',
-      country: [],
-      postcode: [],
-      city: [],
-      states: [],
-      visible: false,
-      visibleDepartment: false,
-      visibleCatExemption: false,
-      visibleIc: true,
-      visiblePassport: false,
-      citizenship: [
-        {
-          name: 'Malaysian',
-          value: '1',
-          selected: true,
-        },
-        { name: 'Non Malaysian', value: '2' },
-      ],
+      showStaticModal: true,
+      companyList: [],
+
       model: {
-        signUp: '',
-        applicationType: '',
-        catExemption: '',
-        qualification: '',
 
-        firstName: '',
-        middleName: '',
-        LastName: '',
-        icNo: '',
-        passport: '',
-        passportExpiryDate: null,
-        citizenship: '1',
-        dateOfBirth: '',
-        applicantAddress: '',
-        applicantAddress2: '',
-        applicantAddress3: '',
-        applicantPostcode: '',
-        applicantCity: '',
-        applicantState: '',
-        applicantPhoneno: '',
-        applicantTAC: '',
-        applicantOfficeNo: '',
+        userId: '',
+        fullName: '',
+        company: '',
+        contactNumber: '',
         applicantEmail: '',
-        otherQua: '',
+        designation: '',
 
-        catConsultant: '',
-        ApprenticeProg: '',
-        namePrpIpraCpra: '',
-        distCode: '',
-
-        department: '',
-        othersDepartment: '',
-        distApprenticeProg: '',
-        distDistPointCode: '',
-        distPointName: '',
-        distaddress: '',
-        distaddress2: '',
-        distpostcode: '',
-        distcity: '',
-        distState: '',
       },
       formOptions: {
-        // validationErrorClass: "has-error",
-        // validationSuccessClass: "has-`success`",
         validateAfterChanged: true,
       },
-      schemaDistributor: {
-        groups: [
-          {
-            styleClasses: 'row',
-            // legend: "A. Authorised Representative",
-            fields: [
-              {
-                type: 'input',
-                inputType: 'text',
-                label: 'Name (as per NRIC)',
-                model: 'firstName',
-                placeholder: 'Please enter name',
-                required: true,
-                validator: 'string',
-                styleClasses: 'col-md-12',
-              },
-              // {
-              //   type: "input",
-              //   inputType: "text",
-              //   label: "Middle Name",
-              //   model: "middleName",
-              //   placeholder: "Please enter middle name",
-              //   required: true,
-              //   validator: "string",
-              //   styleClasses: "col-md-4"
-              // },
-              // {
-              //   type: "input",
-              //   inputType: "text",
-              //   label: "Last Name",
-              //   model: "LastName",
-              //   placeholder: "Please enter last name",
-              //   required: true,
-              //   validator: "string",
-              //   styleClasses: "col-md-4"
-              // },
-              {
-                type: 'radios',
-                label: 'Citizenship',
-                model: 'citizenship',
-                values: () => {
-                  return this.citizenship
-                },
-                styleClasses: 'col-md-4 display-inline',
-              },
-              {
-                labels: 'NRIC No',
-                model: 'icNo',
-                type: 'vfg-the-mask',
-                placeholder: 'Enter NRIC No',
-                mask: '######-##-####',
-                styleClasses: 'col-md-8',
-                visible: (model, field, form) => {
-                  return this.visibleIc
-                },
-                required: true,
-                validator: 'string',
-              },
-              {
-                type: 'input',
-                inputType: 'text',
-                label: 'Passport No.',
-                model: 'passport',
-                placeholder: 'Enter Passport No.',
-                required: true,
-                validator: 'string',
-                styleClasses: 'col-md-4',
-                visible: (model, field, form) => {
-                  return this.visiblePassport
-                },
-              },
-              {
-                labels: 'Passport Expiry Date',
-                type: 'vfg-functional-date',
-                placeholder: 'Passport expiry date',
-                model: 'passportExpiryDate',
-                noLabel: true,
-                format: 'dd-MM-yyyy',
-                styleClasses: 'col-md-4',
-                visible: (model, field, form) => {
-                  return this.visiblePassport
-                },
-                required: true,
-                validator: ['required', this.validateExpiryDate],
-              },
-              // // {
-              // //   type: "input",
-              // //   inputType: "date",
-              // //   label: "Passport Expiry Date",
-              // //   model: "passportExpiryDate",
-              // //   format: "YYYY-MM-DD HH:mm:ss",
-              // //   required: true,
-              // //   validator: "string",
-              // //   styleClasses: "col-md-4",
-              // //   visible: (model, field, form) => {
-              // //     return this.visiblePassport;
-              // //   }
-              // // },
-              // {
-              //   type: "input",
-              //   inputType: "text",
-              //   label: "Address",
-              //   model: "applicantAddress",
-              //   placeholder: "Enter street address",
-              //   hint: "Street Address",
-              //   required: true,
-              //   styleClasses: "col-md-12"
-              // },
-              // {
-              //   type: "input",
-              //   inputType: "text",
-              //   model: "applicantAddress2",
-              //   placeholder: "Enter street address",
-              //   hint: "Street Address line 2",
-              //   styleClasses: "col-md-6"
-              // },
-              // {
-              //   type: "input",
-              //   inputType: "text",
-              //   model: "applicantAddress3",
-              //   placeholder: "Enter street address",
-              //   hint: "Street Address line 3",
-              //   styleClasses: "col-md-6"
-              // }
-
-              // {
-              //   type: "vueMultiSelect",
-              //   model: "applicantPostcode",
-              //   label: "Postcode",
-              //   placeholder: "Enter Your Postcode",
-              //   required: true,
-              //   validator: "required",
-              //   styleClasses: "col-md-6",
-              //   selectOptions: {
-              //     multiple: false,
-              //     key: "POSTCODE_NO",
-              //     label: "POSTCODE_NO",
-              //     searchable: true
-              //   },
-              //   values: (model, schema) => {
-              //     return this.postcode;
-              //   },
-              //   styleClasses: "col-md-6"
-              // },
-              // {
-              //   type: "vueMultiSelect",
-              //   model: "applicantCity",
-              //   label: "City",
-              //   placeholder: "Enter Your City",
-              //   required: true,
-              //   validator: "required",
-              //   styleClasses: "col-md-6",
-              //   selectOptions: {
-              //     multiple: false,
-              //     key: "SET_CITY_NAME",
-              //     label: "SET_CITY_NAME",
-              //     searchable: true
-              //   },
-              //   values: (model, schema) => {
-              //     return this.city;
-              //   },
-              //   disabled: (model, schema) => {
-              //     if (this.model.applicantPostcode) {
-              //       return false;
-              //     } else {
-              //       return true;
-              //     }
-              //   }
-              // },
-              // {
-              //   type: "input",
-              //   inputType: "text",
-              //   label: "State",
-              //   model: "applicantState",
-              //   placeholder: "Enter state",
-              //   required: true,
-              //   styleClasses: "col-md-6",
-              //   disabled: true
-              // },
-              // // {
-              // //   type: "vueMultiSelect",
-              // //   model: "applicantState",
-              // //   label: "State",
-              // //   placeholder: "Enter Your State",
-              // //   required: true,
-              // //   validator: "required",
-              // //   styleClasses: "col-md-6",
-              // //   selectOptions: {
-              // //     multiple: false,
-              // //     key: "name",
-              // //     label: "name",
-              // //     searchable: true
-              // //   },
-              // //   values: (model, schema) => {
-              // //     return this.states;
-              // //   },
-              // //   disabled: (model, schema) => {
-              // //     if (this.model.applicantPostcode) {
-              // //       return false;
-              // //     } else {
-              // //       return true;
-              // //     }
-              // //   }
-              // // },
-              // {
-              //   type: "vueMultiSelect",
-              //   model: "country",
-              //   label: "Country",
-              //   placeholder: "Enter Your Country",
-              //   required: true,
-              //   validator: "required",
-              //   styleClasses: "col-md-6",
-              //   selectOptions: {
-              //     multiple: false,
-              //     key: "SET_PARAM",
-              //     label: "SET_PARAM",
-              //     searchable: true
-              //   },
-              //   values: (model, schema) => {
-              //     return this.country;
-              //   }
-              // },
-              // // {
-              // //   type: "input",
-              // //   inputType: "number",
-              // //   label: "Telephone Number",
-              // //   model: "applicantPhoneno",
-              // //   placeholder: "Enter telephone number",
-              // //   required: true,
-              // //   validator: "number",
-              // //   styleClasses: "col-md-6"
-              // // },
-              {
-                type: 'input',
-                inputType: 'email',
-                label: 'Company Email',
-                model: 'applicantEmail',
-                placeholder: 'Enter email address',
-                required: true,
-                validator: 'string',
-                styleClasses: 'col-md-12',
-              },
-              {
-                labels: 'Telephone Number',
-                model: 'applicantPhoneno',
-                type: 'vfg-the-mask',
-                placeholder: 'Enter telephone number',
-                mask: '01#-########',
-                styleClasses: 'col-md-6',
-                // visible: (model, field, form) => {
-                //   return this.model.applicantPhoneno.length == 10;
-                // },
-                required: true,
-                validator: 'string',
-              },
-              {
-                labels: 'Request TAC',
-                model: 'applicantTAC',
-                type: 'vfg-custom-Tacinput',
-                placeholder: 'Enter TAC number',
-                styleClasses: 'col-md-6',
-                required: true,
-                validator: 'string',
-              },
-              // {
-              //   labels: "Office Number",
-              //   model: "applicantOfficeNo",
-              //   type: "vfg-the-mask",
-              //   placeholder: "Enter office number",
-              //   mask: "######-##-####",
-              //   mask: "0#-########",
-              //   styleClasses: "col-md-6",
-              //   required: true,
-              //   validator: "string"
-              // },
-
-              // //   {
-              // //     type: "select",
-              // //     label: "Highest Educational Qualification",
-              // //     model: "qualification",
-
-              // //     values: () => {
-              // //       return this.qualification;
-              // //     },
-              // //     required: true,
-              // //     validator: "string",
-              // //     styleClasses: "col-md-6"
-              // //   },
-              // //   {
-              // //     type: "input",
-              // //     inputType: "text",
-              // //     model: "otherQua",
-              // //     placeholder: "Others (please specify)",
-              // //     required: true,
-              // //     validator: "string",
-              // //     visible: (model, field, form) => {
-              // //       return this.visible;
-              // //     },
-              // //   },
-            ],
-          },
-        ],
-      },
-
-      email: '',
-      password: '',
-      agreedToTerms: false,
-      emailErrors: [],
-      passwordErrors: [],
-      agreedToTermsErrors: [],
-      signUpOption: [
-        {
-          no: '1',
-          name: 'I want to be a Media member',
-        },
-      ],
-
       schema: {
         groups: [
           {
             styleClasses: 'row',
-            // legend: "A. Authorised Representative",
             fields: [
               {
+                type: 'input',
+                inputType: 'text',
+                label: 'Preferred User ID',
+                model: 'userId',
+                placeholder: 'Please enter preferred User ID',
+                required: true,
+                validator: ['string', this.validateUserID],
+                styleClasses: 'col-md-12',
+              },
+              {
+                type: 'input',
+                inputType: 'text',
+                label: 'Full Name (as per NRIC)',
+                model: 'fullName',
+                placeholder: 'Please enter full name',
+                required: true,
+                styleClasses: 'col-md-12',
+
+              },
+              {
+                type: 'input',
+                inputType: 'text',
+                label: 'Designation',
+                model: 'designation',
+                placeholder: 'Please enter designation',
+                required: true,
+                styleClasses: 'col-md-12',
+              },
+
+              {
                 type: 'vueMultiSelect',
-                model: 'signUp',
-                // label: "City",
-                placeholder: 'Select sign up option',
-                validator: 'required',
+                model: 'company',
+                label: 'Company Name',
+                placeholder: 'Select the company',
+                required: true,
+                // validator: 'required',
                 styleClasses: 'col-md-12',
                 selectOptions: {
                   multiple: false,
-                  key: 'name',
-                  label: 'name',
+                  key: 'COMPANY_ID',
+                  label: 'COMPANY_NAME',
                   searchable: true,
                 },
                 values: (model, schema) => {
-                  return this.signUpOption
+                  return this.companyList
                 },
+              },
+              {
+                type: 'input',
+                inputType: 'text',
+                label: 'Contact Number',
+                model: 'contactNumber',
+                placeholder: 'Please enter contact number',
+                required: true,
+                validator: 'string',
+                styleClasses: 'col-md-12',
+              },
+
+              {
+                type: 'input',
+                inputType: 'email',
+                label: 'Email Address',
+                model: 'applicantEmail',
+                placeholder: 'Enter email address',
+                required: true,
+                validator: ['string', this.validateEmail],
+                styleClasses: 'col-md-12',
+              },
+              {
+                type: 'input',
+                inputType: 'email',
+                label: 'Confirm Email Address',
+                model: 'applicantConfirmEmail',
+                placeholder: 'Enter email address',
+                required: true,
+                validator: ['string', this.isEqualTo],
+                styleClasses: 'col-md-12',
               },
             ],
           },
@@ -511,134 +156,18 @@ export default {
     }
   },
   methods: {
-    submitForm () {
-      if (this.$refs.distributorForm.validate()) {
-        this.$modals.simpleModal.$hide()
-        this.showStaticModal = true
-      } else {
+
+    isEqualTo (value, field, model) {
+      console.log(value)
+      if (value !== this.model.applicantEmail) {
+        return ['Email do not match']
       }
     },
-    async getAllPostal () {
-      const response = await servicesModule0.getAllPostal()
-      this.postcode = response
+    proceedToLogin () {
+      this.$router.push('/auth-media/login-media')
     },
-    async getCityByPostal (data) {
-      const response = await servicesModule0.getCityByPostal(data)
-      this.city = response
-    },
-    async getStateByPostal (data) {
-      const response = await servicesModule0.getStateByCity(data)
-      this.model.applicantState = response.SET_PARAM
-      // this.city = response;
-    },
-    async getCountry () {
-      const response = await servicesModule0.getAllSettingGeneralList(
-        'COUNTRY',
-      )
-      this.country = response
-      this.model.country = { SETTING_GENERAL_ID: 18, SET_PARAM: 'Malaysiaa' }
-    },
-    validateExpiryDate (value) {
-      if (value != null) {
-        const today = new Date()
-        const date =
-          today.getFullYear() +
-          '-' +
-          (today.getMonth() + 1) +
-          '-' +
-          today.getDate()
-        const time =
-          today.getHours() +
-          ':' +
-          today.getMinutes() +
-          ':' +
-          today.getSeconds() +
-          ' GMT'
-        const dateTime = date + ' ' + time
-
-        const unixTimeNow = Date.parse(dateTime)
-        console.log(unixTimeNow)
-
-        // date expiry
-        const expiryDate = this.model.passportExpiryDate
-        const dateExpiry =
-          expiryDate.getFullYear() +
-          '-' +
-          (expiryDate.getMonth() + 1) +
-          '-' +
-          expiryDate.getDate()
-        const timeExpiry =
-          expiryDate.getHours() +
-          ':' +
-          expiryDate.getMinutes() +
-          ':' +
-          expiryDate.getSeconds() +
-          ' GMT'
-        const dateTimeExpiry = dateExpiry + ' ' + timeExpiry
-        const unixTimeExpiryDate = Date.parse(dateTimeExpiry)
-        console.log(unixTimeExpiryDate)
-
-        // compare
-        if (unixTimeExpiryDate < unixTimeNow) {
-          console.log('expired')
-          return ['Expired']
-        } else {
-          console.log('not expired')
-          // return ["Expired"];
-        }
-      } else {
-        console.log('ssdfdsf')
-      }
-    },
-    uploadImage (e) {
-      this.applicantPhoto = this.$refs.applicantPhoto.files[0]
-      const reader = new FileReader()
-      reader.addEventListener(
-        'load',
-        function () {
-          this.$refs.applicantPhotoDisplay.src = reader.result
-        }.bind(this),
-        false,
-      )
-
-      reader.readAsDataURL(this.applicantPhoto)
-    },
-    onModelUpdated (newVal, schema) {
-      console.log(newVal)
-      if (schema == 'applicationType') {
-        this.model.applicationType = newVal
-        if (newVal == '2') {
-          this.visibleCatExemption = true
-        } else {
-          this.visibleCatExemption = false
-        }
-      } else if (schema == 'qualification') {
-        if (newVal == '6') {
-          this.visible = true
-        } else {
-          this.visible = false
-        }
-      } else if (schema == 'department') {
-        if (newVal == '5') {
-          this.visibleDepartment = true
-        } else {
-          this.visibleDepartment = false
-        }
-      } else if (schema == 'citizenship') {
-        if (newVal == 1) {
-          this.visiblePassport = false
-          this.visibleIc = true
-        } else {
-          this.visiblePassport = true
-          this.visibleIc = false
-        }
-      } else if (schema == 'applicantPostcode') {
-        this.model.applicantCity = ''
-        this.getCityByPostal(this.model.applicantPostcode.SETTING_CITY_ID)
-      } else if (schema == 'applicantCity') {
-        this.model.applicantState = ''
-        this.getStateByPostal(this.model.applicantCity.SETTING_GENERAL_ID)
-      }
+    showOverlay (show) {
+      Event.$emit('signup-media:overlay', show)
     },
     handleFileChange (e) {
       this.$emit('input', e.target.files[0])
@@ -648,75 +177,162 @@ export default {
     validateRegisterForm () {
       return this.$refs.regForm.validate()
     },
+    async getUserIdSetting () {
+      const response = await services06Module0.getUserIdSetting(0)
+      this.useridSetting = response
+    },
 
-    submit: async function () {
+    async validateEmail (value) {
+      const response = await services01Module5.checkDuplicateEmail(value)
+      return response.message
+    },
+    async validateUserID (value) {
+      if (value === '') {
+        return
+      }
+      const idlength = value.length
+      if (idlength >= 1) {
+        if (
+          idlength < this.useridSetting.MIN_LENGTH ||
+          idlength > this.useridSetting.MAX_LENGTH
+        ) {
+          if (idlength < this.useridSetting.MIN_LENGTH) {
+            return `USER ID MIN LENGTH MUST BE ${this.useridSetting.MIN_LENGTH}`
+          }
+          if (idlength > this.useridSetting.MAX_LENGTH) {
+            return `USER ID MAX LENGTH MUST BE ${this.useridSetting.MAX_LENGTH}`
+          }
+          return
+        }
+        if (
+          !this.useridSetting.UPPERCASE_LOWERCASE &&
+          !this.useridSetting.SPECIAL_CHARACTERS &&
+          !this.useridSetting.ALPHANUMERIC
+        ) {
+          return
+        } else if (
+          this.useridSetting.UPPERCASE_LOWERCASE &&
+          this.useridSetting.SPECIAL_CHARACTERS &&
+          this.useridSetting.ALPHANUMERIC
+        ) {
+          const expression =
+            /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*?[_])([a-zA-Z0-9_]+)$/
+          if (!expression.test(value)) {
+            return "User ID must contain at least one uppercase letter, one lower case letter, one number and underscore/'_'"
+          }
+        } else if (
+          this.useridSetting.UPPERCASE_LOWERCASE &&
+          this.useridSetting.SPECIAL_CHARACTERS &&
+          !this.useridSetting.ALPHANUMERIC
+        ) {
+          const expression = /^(?=.*[a-z])(?=.*[A-Z])(?=.*?[_])([a-zA-Z0-9_]+)$/
+          if (!expression.test(value)) {
+            return "User ID must contain at least one uppercase letter, one lower case letter, and underscore/'_'."
+          }
+        } else if (
+          this.useridSetting.UPPERCASE_LOWERCASE &&
+          !this.useridSetting.SPECIAL_CHARACTERS &&
+          !this.useridSetting.ALPHANUMERIC
+        ) {
+          const expression = /^(?=.*[a-z])(?=.*[A-Z])([a-zA-Z0-9_]+)$/
+          if (!expression.test(value)) {
+            return 'User ID must contain at least one uppercase letter and one lower case letter'
+          }
+        } else if (
+          this.useridSetting.UPPERCASE_LOWERCASE &&
+          !this.useridSetting.SPECIAL_CHARACTERS &&
+          this.useridSetting.ALPHANUMERIC
+        ) {
+          const expression = /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])([a-zA-Z0-9_]+)$/
+          if (!expression.test(value)) {
+            return 'User ID must contain at least one number, one uppercase letter and one lower case letter'
+          }
+        } else if (
+          !this.useridSetting.UPPERCASE_LOWERCASE &&
+          !this.useridSetting.SPECIAL_CHARACTERS &&
+          this.useridSetting.ALPHANUMERIC
+        ) {
+          const expression = /^(?=.*[0-9])(?=.*[a-zA-Z])([a-zA-Z0-9_]+)$/
+          if (!expression.test(value)) {
+            return 'User ID must contain at least one number and one letter'
+          }
+        } else if (
+          !this.useridSetting.UPPERCASE_LOWERCASE &&
+          this.useridSetting.SPECIAL_CHARACTERS &&
+          this.useridSetting.ALPHANUMERIC
+        ) {
+          const expression =
+            /^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*?[_])([a-zA-Z0-9_]+)$/
+          if (!expression.test(value)) {
+            return "User ID must contain at least one number, one letter and one and underscore/'_'."
+          }
+        } else if (
+          !this.useridSetting.UPPERCASE_LOWERCASE &&
+          this.useridSetting.SPECIAL_CHARACTERS &&
+          !this.useridSetting.ALPHANUMERIC
+        ) {
+          const expression = /^(?=.*?[_])([a-zA-Z0-9_]+)$/
+          if (!expression.test(value)) {
+            return 'User ID must contain at least one special character'
+          }
+        }
+
+        const response = await services01Module5.checkDuplicateMediaUserID(value)
+        if (response) {
+          return response.message
+        }
+      }
+    },
+
+    onModelUpdated (newVal, schema) {
+      if (schema === 'fullName') {
+        this.model.fullName = String(newVal).toUpperCase()
+      }
+      if (schema === 'designation') {
+        this.model.designation = String(newVal).toUpperCase()
+      }
+    },
+
+    getAllCompany: async function () {
+      const response = await services01Module5.getAllCompany()
+      this.companyList = response
+    },
+
+    onSubmit: async function () {
+      const vm = this
       const response = await this.validateRegisterForm()
       if (response) {
-        // this.$router.push("company-detail");
+        const data = new FormData()
+        data.append('USER_ID', this.model.userId)
+        data.append('USER_NAME', this.model.fullName)
+        data.append('DESIGNATION', this.model.designation)
+        data.append('COMPANY_ID', this.model.company.COMPANY_ID)
+        data.append('COMPANY_NAME', this.model.company.COMPANY_NAME)
+        data.append('CONTACT_NUMBER', this.model.contactNumber)
+        data.append('EMAIL', this.model.applicantEmail)
+        data.append('APPR_PROCESSFLOW_ID', 145)
+        data.append('APPR_INDEX', 1)
+        data.append('NOTI_LOCATION', 'media-user-list')
+        data.append('NOTI_REMARK', '(MEDIA USER) New application pending for approval')
+        data.append('NOTI_TITLE', 'Kindly assist to create new User ID as per details below :')
+
+        try {
+          vm.showOverlay(true)
+          const response = await services01Module5.newUserRegistration(data)
+
+          vm.showOverlay(false)
+          vm.showStaticModal = true
+
+          this.model.userId = ''
+          this.model.applicantEmail = ''
+        } catch (error) {
+          console.log(error)
+        }
       } else {
       }
     },
-    validateIC (value) {
-      //* * must contain letter only (lowercase and uppercase) */
-      const expression1 = /^[0-9]+$/
-      // let expression2 = /^[a-zA-Z]*[A-Z]+[a-zA-Z]*$/;
-      // //** must contain at least one uppercase letter, one lower case letter and one number */
-      // let expression4 = /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])([a-zA-Z0-9]+)$/;
-      // //** must contain at least one uppercase letter, one lower case letter, one number and one character */
-      // let expression5 = /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*?[#?!@$%^&*-])([a-zA-Z0-9#?!@$%^&*-]+)$/;
-      // //** must contain at least one uppercase letter, one lower case letter, one number and one character with minimum length*/
-      // let expression6 = /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*?[#?!@$%^&*-])([a-zA-Z0-9#?!@$%^&*-]+).{8}$/;
-
-      console.log(expression1.test(value))
-      if (!expression1.test(value)) {
-        // this.passwordStrength = "";
-        return ['Ic must contain number only']
-      }
-    },
-    isEqualTo (value, field, model) {
-      if (!_.has(field, 'equals')) return ['Confirm password is required']
-      const a = _.get(model, _.get(field, 'equals'))
-      const b = value
-      if (_.isEqual(a, b)) return []
-      return ['Password do not match']
-    },
-    validateFirstTab () {
-      return this.$refs.firstTabForm.validate()
-    },
-    validateSecondTab: function () {
-      return this.$refs.secondTabForm.validate()
-    },
-    validateThirdTab: function () {
-      return this.$refs.thirdTabForm.validate()
-    },
-    validateFourthTab () {
-      return this.$refs.fourthTabForm.validate()
-    },
-    showmodal () {
-      this.$modals.simpleModal.$show()
-    },
-    onsubmit () {
-      // this.emailErrors = this.email ? [] : ["Email is required"];
-      // this.passwordErrors = this.password ? [] : ["Password is required"];
-      // this.agreedToTermsErrors = this.agreedToTerms
-      //   ? []
-      //   : ["You must agree to the terms of use to continue"];
-      // if (!this.formReady) {
-      //   return;
-      // }
-      // this.$router.push({ name: "distributor-self-registration" });
-      this.showmodal()
-    },
   },
-  computed: {
-    formReady () {
-      return !(
-        this.emailErrors.length ||
-        this.passwordErrors.length ||
-        this.agreedToTermsErrors.length
-      )
-    },
-  },
+  computed: {},
 }
 </script>
 
