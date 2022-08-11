@@ -107,6 +107,77 @@ export async function getDistributorMedia () {
     }
   })
 }
+export async function getAllFundTypeList (data) {
+  return axios.get(urlHost + '/api/module0/fund_types', {
+    params: {
+
+    },
+  }).then(response => {
+    console.log(' list :' + JSON.stringify(response.data.data))
+    return response.data.data
+  }).catch(function (error) {
+    if (error.response) {
+      if (error.response.status === 500) {
+        if (error.response.data.message === 'Token expired.') {
+          logout()
+        } else {
+          console.log(error.response.data.message)
+        }
+      } else if (error.response.status === 401) {
+        logout()
+      }
+    }
+  })
+}
+
+export async function getAllFundGroupList (data) {
+  return axios.get(urlHost + '/api/module0/fund_groups', {
+    params: {
+
+    },
+  }).then(response => {
+    console.log(' list :' + JSON.stringify(response.data.data))
+    return response.data.data
+  }).catch(function (error) {
+    if (error.response) {
+      if (error.response.status === 500) {
+        if (error.response.data.message === 'Token expired.') {
+          logout()
+        } else {
+          console.log(error.response.data.message)
+        }
+      } else if (error.response.status === 401) {
+        logout()
+      }
+    }
+  })
+}
+
+export async function getAllSchemeList (data) {
+  return axios.get(urlHost + '/api/module0/fund_schemes', {
+    params: {
+
+    },
+  }).then(response => {
+    console.log(' list :' + JSON.stringify(response.data.data))
+    return response.data.data
+  }).catch(function (error) {
+    if (error.response) {
+      // The request was made and the server responded with a status code
+      // that falls out of the range of 2xx
+      if (error.response.status === 500) {
+        // console.log(JSON.stringify(error.response.data.message));
+        if (error.response.data.message === 'Token expired.') {
+          logout()
+        } else {
+          console.log(error.response.data.message)
+        }
+      } else if (error.response.status === 401) {
+        logout()
+      }
+    }
+  })
+}
 
 export async function getNAVlistMedia () {
   return axios.get(urlHost + '/api/module5/navlistMedia').then(response => {
@@ -185,4 +256,165 @@ export async function fundDetailsMedia (data, data2) {
         }
       }
     })
+}
+
+export async function fundDetailsMediaAdvanced (data, data2, data3, data4, data5, data6, data7, data8, data9) {
+  return axios
+    .get(urlHost + '/api/module5/fundDetailsMediaAdvanced', {
+      params: {
+        DISTRIBUTOR_ID: data,
+        FUND_NAME: data2,
+        FUND_DATE_LAUNCH: data3,
+        FUND_TYPE: data4,
+        FUND_CATEGORY: data5,
+        FUND_SYARIAH_COMP: data6,
+        FUND_STATUS_SRI_ESG: data7,
+        FUND_EPFMIS: data8,
+        FUND_SCHEME: data9,
+      },
+    })
+    .then((response) => {
+      console.log('data :' + JSON.stringify(response.data.data))
+      return response.data.data
+    })
+    .catch(function (error) {
+      if (error.response) {
+        // eslint-disable-next-line no-undef
+        Vue.$toast.open({
+          message: error.response.data.message,
+          type: 'error',
+        })
+        if (error.response.status === 401) {
+          logout()
+        } else {
+          return 'error'
+        }
+      }
+    })
+}
+
+export async function verifyTACESC (tac, phone) {
+  // console.log('tac : ' + tac);
+  console.log('phone : ' + phone)
+  // isLogin == 1 ? await servicesModule0.header() : '';
+  return axios.get(urlHost + '/api/module0/verify_TAC', {
+    params: {
+      SMS_TAC_NUMBER: tac,
+      SMS_TAC_RECIPIENT: phone,
+    },
+  }).then(response => {
+    // console.log("aaaaaaaaaaaa=",response);
+    return response.data.message
+  }).catch(function (error) {
+    if (error.response) {
+      // The request was made and the server responded with a status code
+      // that falls out of the range of 2xx
+      if (error.response.status == 500) {
+        // console.log(JSON.stringify(error.response.data.message));
+        if (error.response.data.message == 'Token expired.') {
+          console.log('logout')
+          // logout();
+        } else {
+          console.log(error.response.data.message)
+        }
+      } else if (error.response.status == 401) {
+        // logout();
+      }
+      return error.response.data.message
+    }
+  })
+}
+
+export async function getPasswordSetting (isLogin) {
+  return axios.get(urlHost + '/api/module0/setting_password').then(response => {
+    console.log(response.data)
+    return response.data.data
+  }).catch(function (error) {
+    if (error.response) {
+      // The request was made and the server responded with a status code
+      // that falls out of the range of 2xx
+      if (error.response.status == 500) {
+        // console.log(JSON.stringify(error.response.data.message));
+        if (error.response.data.message == 'Token expired.') {
+          console.log('logout')
+          // logout();
+        } else {
+          console.log(error.response.data.message)
+        }
+      } else if (error.response.status == 401) {
+        // logout();
+      }
+      return 'error'
+    }
+  })
+}
+export async function getSecurityQuestionAll (isLogin) {
+  return axios.get(urlHost + '/api/module0/security_question_all').then(response => {
+    console.log(response.data)
+    return response.data.data
+  }).catch(function (error) {
+    if (error.response) {
+      // The request was made and the server responded with a status code
+      // that falls out of the range of 2xx
+      if (error.response.status == 500) {
+        // console.log(JSON.stringify(error.response.data.message));
+        if (error.response.data.message == 'Token expired.') {
+          console.log('logout')
+          // logout();
+        } else {
+          console.log(error.response.data.message)
+        }
+      } else if (error.response.status == 401) {
+        // logout();
+      }
+      return 'error'
+    }
+  })
+}
+
+export async function securityQuestion () {
+  return axios.get(urlHost + '/api/module1/user_security_quest').then(response => {
+    console.log(response.data.data)
+    return response.data.data
+  }).catch(function (error) {
+    if (error.response) {
+      // The request was made and the server responded with a status code
+      // that falls out of the range of 2xx
+      if (error.response.status == 500) {
+        // console.log(JSON.stringify(error.response.data.message));
+        if (error.response.data.message == 'Token expired.') {
+          console.log('logout')
+          logout()
+        } else {
+          console.log(error.response.data.message)
+        }
+      } else if (error.response.status == 401) {
+        logout()
+      }
+      return 'error'
+    }
+  })
+}
+export async function updatePassword (data) {
+  return axios.post(urlHost + '/api/module5/others_reg_update', data).then(response => {
+    console.log(response.data)
+    return response.data
+  }).catch(function (error) {
+    if (error.response) {
+      // The request was made and the server responded with a status code
+      // that falls out of the range of 2xx
+      if (error.response.status == 500) {
+        // console.log(JSON.stringify(error.response.data.message));
+        if (error.response.data.message == 'Token expired.') {
+          console.log('logout')
+          logout()
+        } else {
+          console.log(error.response.data.message)
+        }
+      } else if (error.response.status == 401) {
+        logout()
+      }
+      return 'error'
+    }
+  })
 }

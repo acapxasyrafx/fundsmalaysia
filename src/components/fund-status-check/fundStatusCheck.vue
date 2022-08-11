@@ -1,31 +1,32 @@
 <template>
   <div>
-    <div class="container-xxl py-5">
-      <div class="container px-lg-5">
-        <div class="row g-5">
-          <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
-            <div class="section-title position-relative mb-4 pb-2">
-              <h6 class="position-relative text-primary ps-4">Advanced Search Fund</h6>
-            </div>
-            <div class="row g-6">
-              <div class="col-sm-12">
-                <div>
-                  <vue-form-generator
-                    :model="model"
-                    :schema="Schema"
-                    :options="formOptions"
-                    ref="advancedSearchForm"
-                    @model-updated="onModelUpdated"
-                  >
-                  </vue-form-generator>
-                  <br />
-                  <button
-                    @click="onSearch"
-                    type="button"
-                    class="ml-2 btn btn-sm btn-primary"
-                  >
-                    Search
-                  </button>
+    <va-card>
+      <div class="container-xxl py-5">
+        <div class="container px-lg-5">
+          <div class="row g-5">
+            <div class="col-lg-12 wow fadeInUp" data-wow-delay="0.1s">
+              <div class="section-title position-relative mb-4 pb-2">
+                <h6 class="position-relative text-primary ps-4">Advanced Search Fund</h6>
+              </div>
+              <div class="row g-12">
+                <div class="col-sm-12">
+                  <div>
+                    <vue-form-generator
+                      :model="model"
+                      :schema="Schema"
+                      :options="formOptions"
+                      ref="advancedSearchForm"
+                      @model-updated="onModelUpdated"
+                    >
+                    </vue-form-generator>
+                    <br />
+                    <button
+                      @click="onSearch"
+                      type="button"
+                      class="ml-2 btn btn-sm btn-primary"
+                    >
+                      Search
+                    </button>
                   <!-- <button
                     @click="reset"
                     type="button"
@@ -33,188 +34,49 @@
                   >
                     Reset
                   </button> -->
+                  </div>
+                  <br/>
+                  <va-separator />
+                  <br/>
                 </div>
-                <va-separator />
-                <div>
-                  <div class="col">
-                    <div class="row mb-1">
-                      <span class="description col-4">STATUS : </span>
-                      <span class="description col">
-                        <div>
-                          {{ this.details.TS_PARAM }}
-                        </div>
-                      </span>
-                    </div>
-                  </div>
-                  <br/>
-                  <div class="col">
-                    <div class="row mb-1">
-                      <span class="description col-4">LAUNCH DATE : </span>
-                      <span class="description col">
-                        <div>
-                          {{ details.FUND_DATE_LAUNCH }}
-                        </div>
-                      </span>
-                    </div>
-                  </div>
-                  <br/>
-                  <div class="col">
-                    <div class="row mb-1">
-                      <span class="description col-4">FUND TYPE : </span>
-                      <span class="description col">
-                        <div
-                          v-if="
-                            details.FUND_TYPE_FULLNAME != null &&
-                              details.FUND_TYPE_FULLNAME != ''
-                          "
-                        >
-                          {{ details.FUND_TYPE_FULLNAME }}
-                        </div>
-                        <div
-                          v-else-if="
-                            details.FUND_TYPE_FULLNAME == null ||
-                              details.FUND_TYPE_FULLNAME == ''
-                          "
-                        >
-                          -
-                        </div>
-                      </span>
-                    </div>
-                  </div>
-                  <br/>
-                  <div class="col">
-                    <div class="row mb-1">
-                      <span class="description col-4">FUND CATEGORY : </span>
-                      <span class="description col">
-                        <div
-                          v-if="
-                            details.GROUP_ASSET != null &&
-                              details.GROUP_ASSET != ''
-                          "
-                        >
-                          {{ details.GROUP_ASSET }}
-                        </div>
-                        <div
-                          v-else-if="
-                            details.GROUP_ASSET == null ||
-                              details.GROUP_ASSET == ''
-                          "
-                        >
-                          -
-                        </div>
-                      </span>
-                    </div>
-                  </div>
-                  <br/>
-                  <div class="col">
-                    <div class="row mb-1">
-                      <span class="description col-4">SHARIAH COMPLIANT : </span>
-                      <span class="description col">
-                        <div v-if="details.FUND_SYARIAH_COMP == 1">Yes</div>
-                        <div v-if="details.FUND_SYARIAH_COMP == 2">No</div>
-                        <div
-                          v-else-if="
-                            details.FUND_SYARIAH_COMP == null ||
-                              details.FUND_SYARIAH_COMP == ''
-                          "
-                        >
-                          -
-                        </div>
-                      </span>
-                    </div>
-                  </div>
-                  <br/>
-                  <div class="col">
-                    <div class="row mb-1">
-                      <span class="description col-4">SRI/ESG FUND : </span>
-                      <span class="description col">
-                        <div v-if="details.FUND_ASEAN_CIS_STATUS == 1">Yes</div>
-                        <div v-if="details.FUND_ASEAN_CIS_STATUS == 2">No</div>
-                        <div
-                          v-else-if="
-                            details.FUND_ASEAN_CIS_STATUS == null ||
-                              details.FUND_ASEAN_CIS_STATUS == ''
-                          "
-                        >
-                          -
-                        </div>
-                      </span>
-                    </div>
-                  </div>
-                  <br/>
-                  <div class="col">
-                    <div class="row mb-1">
-                      <span class="description col-4">EPF-MIS : </span>
-                      <span class="description col">
-                        <div v-if="details.FUND_STATUS_EPF == 1">Yes</div>
-                        <div v-if="details.FUND_STATUS_EPF == 2">No</div>
-                        <div
-                          v-else-if="
-                            details.FUND_STATUS_EPF == null ||
-                              details.FUND_STATUS_EPF == ''
-                          "
-                        >
-                          -
-                        </div>
-                      </span>
-                    </div>
-                  </div>
-                  <br/>
-                  <div class="col">
-                    <div class="row mb-1">
-                      <span class="description col-4">SCHEME STRUCTURE : </span>
-                      <span class="description col">
-                        <div
-                          v-if="
-                            details.FUND_SCHEME != null &&
-                              details.FUND_SCHEME != ''
-                          "
-                        >
-                          {{ details.FMS_SCHEME_NAME }}
-                        </div>
-                        <div
-                          v-else-if="
-                            details.FUND_SCHEME == null ||
-                              details.FUND_SCHEME == ''
-                          "
-                        >
-                          -
-                        </div>
-                      </span>
-                    </div>
-                  </div>
-                  <br/>
-                  <div class="col">
-                    <div class="row mb-1">
-                      <span class="description col-4">NAV : </span>
-                      <span class="description col">
-                        <div>
-                          <b-table
-                            bordered
-                            :head-variant="'light'"
-                            :items="items"
-                            :fields="fields"
-                            show-empty
-                          >
-                            <template #empty="scope"> No Data Found </template>
-                          </b-table>
-                        </div>
-                      </span>
-                    </div>
-                  </div>
+              </div>
+              <div v-if="this.displayTable == 1">
+                <div class="table-responsive">
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th>FUND NAME</th>
+                        <th>DISTRIBUTOR</th>
+                        <th>STATUS</th>
+                        <th>LAUNCH DATE</th>
+                        <th>FUND TYPE</th>
+                        <th>FUND CATEGORY</th>
+                        <th>SHARIAH COMPLIANT</th>
+                        <th>EPF-MIS</th>
+                        <th>SCHEME STRUCTURE</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr v-for="data in details" :key="data.FUND_PROFILE_ID">
+                        <td>{{data.FUND_NAME}}</td>
+                        <td>{{data.DISTRIBUTOR_NAME}}</td>
+                        <td>{{data.FUND_STATUS}}</td>
+                        <td>{{data.FUND_DATE_LAUNCH}}</td>
+                        <td>{{data.FUND_TYPE}}</td>
+                        <td>{{data.FUND_CATEGORY}}</td>
+                        <td>{{data.FUND_SYARIAH_COMP}}</td>
+                        <td>{{data.EPF-MIS}}</td>
+                        <td>{{data.SCHEME_STRUCTURE}}</td>
+                      </tr>
+                    </tbody>
+                  </table>
                 </div>
               </div>
             </div>
-            <div class="d-flex align-items-center mt-4">
-
-            </div>
-          </div>
-          <div class="col-lg-6">
-            <img class="img-fluid wow zoomIn" data-wow-delay="0.5s" src="./img/about.jpg">
           </div>
         </div>
       </div>
-    </div>
+    </va-card>
   </div>
 </template>
 <script>
@@ -225,6 +87,9 @@ export default {
   name: 'fundStatusCheck',
   mounted () {
     this.getDistributorMedia()
+    this.getAllFundTypeList()
+    this.getAllFundCategoryList()
+    this.getAllSchemeList()
   },
   data () {
     return {
@@ -235,6 +100,7 @@ export default {
       emailErrors: [],
       passwordErrors: [],
       remember: false,
+      displayTable: 0,
 
       header: '',
       field: [],
@@ -248,22 +114,20 @@ export default {
 
       distributor: [],
       fund: [],
-      details: [
+      details: [],
+
+      FundTypeList: [],
+      FundCategoryList: [],
+      FundSchemeList: [],
+
+      RADIO_VAL: [
         {
-          FUND_PROFILE_ID: '-',
-          FUND_NAME: '-',
-          FUND_STATUS_FUND: '-',
-          TS_PARAM: '-',
-          FUND_DATE_LAUNCH: '-',
-          FUND_TYPE: '-',
-          FUND_TYPE_FULLNAME: '-',
-          FUND_CATEGORY: '-',
-          GROUP_ASSET: '-',
-          FUND_SYARIAH_COMP: '-',
-          FUND_STATUS_SRI_ESG: '-',
-          FUND_STATUS_EPF: '-',
-          FUND_SCHEME: '-',
-          FMS_SCHEME_NAME: '-',
+          value: '1',
+          name: 'Yes',
+        },
+        {
+          value: '2',
+          name: 'No',
         },
       ],
 
@@ -292,6 +156,7 @@ export default {
       Schema: {
         groups: [
           {
+            styleClasses: 'row',
             fields: [
               {
                 type: 'vueMultiSelect',
@@ -309,26 +174,24 @@ export default {
                 values: (model, schema) => {
                   return this.distributor
                 },
+                styleClasses: 'col-md-4',
               },
               {
                 type: 'input',
                 inputType: 'text',
                 model: 'FUND_NAME',
                 label: 'Fund Name',
+                styleClasses: 'col-md-4',
               },
               {
-                type: 'vueMultiSelect',
-                inputType: 'text',
-                model: 'FUND_NAME',
-                label: 'Launch Date',
-                placeholder: 'Select Fund',
-                selectOptions: {
-                  multiple: false,
-                  trackBy: 'FUND_PROFILE_ID',
-                  key: 'FUND_PROFILE_ID',
-                  label: 'FUND_NAME',
-                  searchable: true,
-                },
+                labels: 'Launch Date',
+                type: 'vfg-functional-date',
+                placeholder: 'dd-MM-yyyy',
+                model: 'LAUNCH_DATE',
+                noLabel: true,
+                noClearButton: true,
+                format: 'dd-MM-yyyy',
+                styleClasses: 'col',
                 values: (model, schema) => {
                   return this.fund
                 },
@@ -336,121 +199,78 @@ export default {
               {
                 type: 'vueMultiSelect',
                 inputType: 'text',
-                model: 'FUND_NAME',
+                model: 'FUND_TYPE',
                 label: 'Fund Type',
-                placeholder: 'Select Fund',
+                placeholder: 'Select Fund Type',
                 selectOptions: {
                   multiple: false,
-                  trackBy: 'FUND_PROFILE_ID',
-                  key: 'FUND_PROFILE_ID',
-                  label: 'FUND_NAME',
-                  searchable: true,
+                  key: 'FMS_FUNDTYPE_ID',
+                  label: 'FUND_TYPE_FULLNAME',
+                  searchable: false,
                 },
                 values: (model, schema) => {
-                  return this.fund
+                  return this.FundTypeList
                 },
+                styleClasses: 'col-md-2',
               },
               {
                 type: 'vueMultiSelect',
-                inputType: 'text',
-                model: 'FUND_NAME',
+                model: 'FUND_CATEGORY',
                 label: 'Fund Category',
-                placeholder: 'Select Fund',
+                placeholder: 'Select Fund Category',
                 selectOptions: {
                   multiple: false,
-                  trackBy: 'FUND_PROFILE_ID',
-                  key: 'FUND_PROFILE_ID',
-                  label: 'FUND_NAME',
-                  searchable: true,
+                  key: 'FMS_FUNDCATEGORY_ID',
+                  label: 'GROUP_ASSET',
+                  searchable: false,
                 },
                 values: (model, schema) => {
-                  return this.fund
+                  return this.FundCategoryList
                 },
+                styleClasses: 'col-md-3',
               },
               {
                 type: 'vueMultiSelect',
-                inputType: 'text',
-                model: 'FUND_NAME',
-                label: 'Fund Category',
-                placeholder: 'Select Fund',
-                selectOptions: {
-                  multiple: false,
-                  trackBy: 'FUND_PROFILE_ID',
-                  key: 'FUND_PROFILE_ID',
-                  label: 'FUND_NAME',
-                  searchable: true,
-                },
-                values: (model, schema) => {
-                  return this.fund
-                },
-              },
-              {
-                type: 'vueMultiSelect',
-                inputType: 'text',
-                model: 'FUND_NAME',
-                label: 'Shariah Compliant',
-                placeholder: 'Select Fund',
-                selectOptions: {
-                  multiple: false,
-                  trackBy: 'FUND_PROFILE_ID',
-                  key: 'FUND_PROFILE_ID',
-                  label: 'FUND_NAME',
-                  searchable: true,
-                },
-                values: (model, schema) => {
-                  return this.fund
-                },
-              },
-              {
-                type: 'vueMultiSelect',
-                inputType: 'text',
-                model: 'FUND_NAME',
-                label: 'SRI/ESG Fund',
-                placeholder: 'Select Fund',
-                selectOptions: {
-                  multiple: false,
-                  trackBy: 'FUND_PROFILE_ID',
-                  key: 'FUND_PROFILE_ID',
-                  label: 'FUND_NAME',
-                  searchable: true,
-                },
-                values: (model, schema) => {
-                  return this.fund
-                },
-              },
-              {
-                type: 'vueMultiSelect',
-                inputType: 'text',
-                model: 'FUND_NAME',
-                label: 'EPF-MIS',
-                placeholder: 'Select Fund',
-                selectOptions: {
-                  multiple: false,
-                  trackBy: 'FUND_PROFILE_ID',
-                  key: 'FUND_PROFILE_ID',
-                  label: 'FUND_NAME',
-                  searchable: true,
-                },
-                values: (model, schema) => {
-                  return this.fund
-                },
-              },
-              {
-                type: 'vueMultiSelect',
-                inputType: 'text',
-                model: 'FUND_NAME',
+                model: 'FUND_SCHEME',
                 label: 'Scheme Structure',
-                placeholder: 'Select Fund',
+                placeholder: 'Select scheme structure',
+                styleClasses: 'col-md-3',
                 selectOptions: {
                   multiple: false,
-                  trackBy: 'FUND_PROFILE_ID',
-                  key: 'FUND_PROFILE_ID',
-                  label: 'FUND_NAME',
-                  searchable: true,
+                  key: 'FMS_SCHEME_ID',
+                  label: 'FMS_SCHEME_NAME',
+                  searchable: false,
                 },
                 values: (model, schema) => {
-                  return this.fund
+                  return this.FundSchemeList
                 },
+              },
+              {
+                type: 'radios',
+                model: 'SHARIAHCOMPLIANT',
+                label: 'Shariah Compliant',
+                styleClasses: 'col-md-2',
+                values: () => {
+                  return this.RADIO_VAL
+                },
+              },
+              {
+                type: 'radios',
+                model: 'SRIESGFUND',
+                label: 'SRI/ESG Fund',
+                values: () => {
+                  return this.RADIO_VAL
+                },
+                styleClasses: 'col-md-2',
+              },
+              {
+                type: 'radios',
+                model: 'EPFMIS',
+                label: 'EPF-MIS',
+                values: () => {
+                  return this.RADIO_VAL
+                },
+                styleClasses: 'col-md-2',
               },
             ],
           },
@@ -464,27 +284,31 @@ export default {
     //   console.log(this.term)
     // }, 400),
     onSearch: async function () {
-      const data = this.model.DISTRIBUTOR.DISTRIBUTOR_ID
-      const data2 = this.model.FUND_NAME.FUND_PROFILE_ID
-      const response = await servicesModule1.fundDetailsMedia(data, data2)
-      console.log('before in var : ', this.details)
-      this.details = response[0]
-      console.log('after in var : ', this.details)
-    },
-    async filterNAV () {
+      var data = null
+      if (this.model.DISTRIBUTOR.DISTRIBUTOR_ID != null) {
+        data = this.model.DISTRIBUTOR.DISTRIBUTOR_ID
+      }
+      const data2 = this.model.FUND_NAME
+      const data3 = this.model.LAUNCH_DATE
+      const data4 = this.model.FUND_TYPE.FMS_FUNDTYPE_ID
+      const data5 = this.model.FUND_CATEGORY.FMS_FUNDCATEGORY_ID
+      // const data6 = this.model.SHARIAHCOMPLIANT.value
+      // const data7 = this.model.SRIESGFUND.value
+      // const data8 = this.model.EPFMIS.value
+      // const data9 = this.model.SCHEME_STRUCTURE.
+      const data6 = null
+      const data7 = null
+      const data8 = null
+      const data9 = null
       try {
-        const response = await servicesModule1.getNAVlistMedia(
-          this.model.modelFilter,
-        )
-        if (response !== 'error') {
-          this.navListRecordList = response
-        }
-      } catch (error) {}
-    },
-    getNAVlist: async function () {
-      const response = await servicesModule1.getNAVlistMedia()
-      this.navListRecordList = response
-      this.navListRecordCount = this.navListRecordList.length
+        const response = await servicesModule1.fundDetailsMediaAdvanced(data, data2, data3, data4, data5, data6, data7, data8, data9)
+        console.log('before in var : ', this.details)
+        this.details = response
+        console.log('after in var : ', this.details)
+        this.displayTable = 1
+      } catch (error) {
+        console.log(error)
+      }
     },
     getDistributorMedia: async function () {
       const response = await servicesModule1.getDistributorMedia()
@@ -494,6 +318,21 @@ export default {
       console.log(data)
       const response = await servicesModule1.getFundProfileFilter(data)
       this.fund = response
+    },
+    getAllFundTypeList: async function () {
+      const response = await servicesModule1.getAllFundTypeList()
+      this.FundTypeList = response
+      console.log(this.FundTypeList)
+    },
+    getAllFundCategoryList: async function () {
+      const response = await servicesModule1.getAllFundGroupList()
+      this.FundCategoryList = response
+      console.log(this.FundCategoryList)
+    },
+    getAllSchemeList: async function () {
+      const response = await servicesModule1.getAllSchemeList()
+      this.FundSchemeList = response
+      console.log(this.FundSchemeList)
     },
     onModelUpdated (newVal, schema) {
       if (schema === 'DISTRIBUTOR') {

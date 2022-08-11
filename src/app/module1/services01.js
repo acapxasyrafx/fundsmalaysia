@@ -319,7 +319,7 @@ export async function verifyMediaUser (data) {
   return axios.get(urlHost + '/api/module5/verify_media_user', {
     params: {
       username: data.username,
-      USER_PASS_NUM: data.USER_PASS_NUM,
+      password: data.password,
     },
   }).then(response => {
     localStorage.setItem('realmName', 'realm0')

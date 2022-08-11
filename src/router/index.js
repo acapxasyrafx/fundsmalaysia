@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import AuthLayout from '../components/auth/AuthLayout'
 import AppLayout from '../components/admin/AppLayout'
+import AuthLayoutOthersRecoverPass from '../components/auth/AuthLayoutRecoverPassword'
 import * as services from '../app/module0/services'
 
 Vue.use(Router)
@@ -159,6 +160,31 @@ export default new Router({
         next()
         // }
       },
+    },
+
+    {
+      path: '/auth-media-recover',
+      component: AuthLayoutOthersRecoverPass,
+      children: [
+        {
+          name: 'media-recover-password',
+          path: 'media-recover-password',
+          component: () =>
+            import(
+              '../components/auth/first-time-user/OthersFirstTimeUserResetPassword.vue'
+            ),
+          props: true,
+        },
+        {
+          name: 'reset-password-media',
+          path: 'reset-password-media',
+          component: () =>
+            import(
+              '../components/auth/reset-password/RecoverPasswordOthers.vue'
+            ),
+          props: true,
+        },
+      ],
     },
   ],
 })

@@ -161,15 +161,19 @@ export default {
         // this.showOverlay(true)
         console.log('start verify')
         const response = await services01Module5.verifyMediaUser(data)
+        this.$router.push({
+          name: 'media-recover-password',
+          params: { USER_ID: response.data.USER_ID },
+        })
         // console.log(response.data.TP_USER_TYPE);
-        if (response.data.errorCode == 4010) {
+        if (response.data.errorCode === 4010) {
           this.$router.push({ name: 'page_under_maintenance_media' })
           return
         }
-        if (response.data.errorCode == 4003) {
+        if (response.data.errorCode === 4003) {
           this.errors = [response.data.message]
         } else if (typeof response.data.ISLOGIN !== 'undefined') {
-          if (response.data.ISLOGIN == 0 || response.data.ISLOGIN == null || response.data.ISLOGIN == undefined) {
+          if (response.data.ISLOGIN === 0 || response.data.ISLOGIN == null || response.data.ISLOGIN === undefined) {
             console.log('New User')
             localStorage.setItem('recover-password', response.data.USER_ID)
             this.$router.push({
@@ -177,7 +181,7 @@ export default {
               params: { USER_ID: response.data.USER_ID },
             })
             // this.showOverlay(false)
-          } else if (response.data.ISLOGIN == 1) {
+          } else if (response.data.ISLOGIN === 1) {
             console.log('other else here 1')
             console.log('User Media')
             console.log(JSON.stringify(response.data))
