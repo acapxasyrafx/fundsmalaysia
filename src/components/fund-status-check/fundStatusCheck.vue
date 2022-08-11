@@ -387,8 +387,11 @@ export default {
       this.model.LAUNCH_DATE = null
       this.model.FUND_NAME = null
       this.model.FUND_TYPE = null
-      // this.model.DISTRIBUTOR.FMS_FUNDTYPE_ID = null
-      // this.model.FUND_CATEGORY.FMS_FUNDCATEGORY_ID = null
+      this.model.FUND_CATEGORY = null
+      this.model.SHARIAHCOMPLIANT = null
+      this.model.SRIESGFUND = null
+      this.model.EPFMIS = null
+      this.model.SCHEME_STRUCTURE = null
     },
     onModelUpdated (newVal, schema) {
       if (schema === 'DISTRIBUTOR') {
