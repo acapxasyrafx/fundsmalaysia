@@ -27,13 +27,13 @@
                     >
                       Search
                     </button>
-                  <!-- <button
-                    @click="reset"
-                    type="button"
-                    class="ml-2 btn btn-sm btn-danger"
-                  >
-                    Reset
-                  </button> -->
+                    <button
+                      @click="resetValue"
+                      type="button"
+                      class="ml-2 btn btn-sm btn-danger"
+                    >
+                      Reset
+                    </button>
                   </div>
                   <br/>
                   <va-separator />
@@ -320,12 +320,12 @@ export default {
       if (this.model.LAUNCH_DATE != null) {
         data2 = this.model.LAUNCH_DATE
       }
-      // if (this.model.FUND_TYPE.FMS_FUNDTYPE_ID != null) {
-      //   data3 = this.model.FUND_TYPE.FMS_FUNDTYPE_ID
-      // }
-      // if (this.model.DISTRIBUTOR.DISTRIBUTOR_ID != null) {
-      //   data4 = this.model.DISTRIBUTOR.DISTRIBUTOR_ID
-      // }
+      if (this.model.FUND_TYPE.LAUNCH_DATE != null) {
+        data3 = this.model.FUND_TYPE.LAUNCH_DATE
+      }
+      if (this.model.DISTRIBUTOR.FMS_FUNDTYPE_ID != null) {
+        data4 = this.model.DISTRIBUTOR.FMS_FUNDTYPE_ID
+      }
       // if (this.model.DISTRIBUTOR.DISTRIBUTOR_ID != null) {
       //   data5 = this.model.DISTRIBUTOR.DISTRIBUTOR_ID
       // }
@@ -380,6 +380,13 @@ export default {
       const response = await servicesModule1.getAllSchemeList()
       this.FundSchemeList = response
       console.log(this.FundSchemeList)
+    },
+    resetValue: async function () {
+      this.model.DISTRIBUTOR.DISTRIBUTOR_ID = null
+      this.model.LAUNCH_DATE = null
+      this.model.FUND_TYPE.LAUNCH_DATE = null
+      this.model.DISTRIBUTOR.FMS_FUNDTYPE_ID = null
+      this.model.FUND_CATEGORY.FMS_FUNDCATEGORY_ID = null
     },
     onModelUpdated (newVal, schema) {
       if (schema === 'DISTRIBUTOR') {
