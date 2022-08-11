@@ -320,15 +320,15 @@ export default {
       if (this.model.FUND_NAME != null) {
         data2 = this.model.FUND_NAME
       }
-      if (this.model.LAUNCH_DATE != null) {
-        data3 = this.model.LAUNCH_DATE
-      }
-      if (this.model.DISTRIBUTOR.FMS_FUNDTYPE_ID != null) {
-        data4 = this.model.DISTRIBUTOR.FMS_FUNDTYPE_ID
-      }
-      if (this.model.FUND_CATEGORY.FMS_FUNDCATEGORY_ID != null) {
-        data5 = this.model.FUND_CATEGORY.FMS_FUNDCATEGORY_ID
-      }
+      // if (this.model.LAUNCH_DATE != null) {
+      //   data3 = this.model.LAUNCH_DATE
+      // }
+      // if (this.model.DISTRIBUTOR.FMS_FUNDTYPE_ID != null) {
+      //   data4 = this.model.DISTRIBUTOR.FMS_FUNDTYPE_ID
+      // }
+      // if (this.model.FUND_CATEGORY.FMS_FUNDCATEGORY_ID != null) {
+      //   data5 = this.model.FUND_CATEGORY.FMS_FUNDCATEGORY_ID
+      // }
       // if (this.model.DISTRIBUTOR.DISTRIBUTOR_ID != null) {
       //   data6 = this.model.DISTRIBUTOR.DISTRIBUTOR_ID
       // }
