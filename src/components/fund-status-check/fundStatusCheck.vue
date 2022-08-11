@@ -60,19 +60,34 @@
                       <tr v-for="data in fundDetails" :key="data.FUND_PROFILE_ID">
                         <td>{{data.FUND_NAME}}</td>
                         <td>{{data.DISTRIBUTOR_NAME}}</td>
-                        <td>{{data.TS_PARAM}}</td>
-                        <td>{{data.FUND_DATE_LAUNCH}}</td>
-                        <td>{{data.FUND_TYPE_FULLNAME}}</td>
-                        <td>{{data.GROUP_ASSET}}</td>
+                        <td>
+                          {{data.TS_PARAM}}</td>
+                        <td>
+                          <div v-if="data.FUND_DATE_LAUNCH != null">{{ data.FUND_DATE_LAUNCH }}</div>
+                          <div v-if="data.FUND_DATE_LAUNCH == null">-</div>
+                        </td>
+                        <td>
+                          <div v-if="data.FUND_TYPE_FULLNAME != null">{{ data.FUND_TYPE_FULLNAME }}</div>
+                          <div v-if="data.FUND_TYPE_FULLNAME == null">-</div>
+                        </td>
+                        <td>
+                          <div v-if="data.GROUP_ASSET != null">{{ data.GROUP_ASSET }}</div>
+                          <div v-if="data.GROUP_ASSET == null">-</div>
+                        </td>
                         <td>
                           <div v-if="data.FUND_SYARIAH_COMP == 1">YES</div>
                           <div v-if="data.FUND_SYARIAH_COMP == 2">NO</div>
+                          <div v-if="data.FUND_SYARIAH_COMP == null">-</div>
                         </td>
                         <td>
                           <div v-if="data.FUND_STATUS_EPF == 1">YES</div>
                           <div v-if="data.FUND_STATUS_EPF == 2">NO</div>
+                          <div v-if="data.FUND_STATUS_EPF == null">-</div>
                         </td>
-                        <td>{{data.FMS_SCHEME_NAME}}</td>
+                        <td>
+                          <div v-if="data.FMS_SCHEME_NAME != null">{{ data.FMS_SCHEME_NAME }}</div>
+                          <div v-if="data.FMS_SCHEME_NAME == null">-</div>
+                        </td>
                       </tr>
                     </tbody>
                   </table>
