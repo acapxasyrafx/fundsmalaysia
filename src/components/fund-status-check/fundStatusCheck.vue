@@ -326,9 +326,9 @@ export default {
       if (this.model.DISTRIBUTOR.FMS_FUNDTYPE_ID != null) {
         data4 = this.model.DISTRIBUTOR.FMS_FUNDTYPE_ID
       }
-      // if (this.model.DISTRIBUTOR.DISTRIBUTOR_ID != null) {
-      //   data5 = this.model.DISTRIBUTOR.DISTRIBUTOR_ID
-      // }
+      if (this.model.FUND_CATEGORY.FMS_FUNDCATEGORY_ID != null) {
+        data5 = this.model.FUND_CATEGORY.FMS_FUNDCATEGORY_ID
+      }
       // if (this.model.DISTRIBUTOR.DISTRIBUTOR_ID != null) {
       //   data6 = this.model.DISTRIBUTOR.DISTRIBUTOR_ID
       // }
