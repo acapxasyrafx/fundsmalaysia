@@ -102,6 +102,7 @@
 </template>
 <script>
 import axios from 'axios'
+import moment from "moment";
 import * as servicesModule1 from '../../app/module1/services'
 
 export default {
@@ -320,17 +321,17 @@ export default {
       if (this.model.FUND_NAME != null) {
         data2 = this.model.FUND_NAME
       }
-      // if (this.model.LAUNCH_DATE != null) {
-      //   data3 = this.model.LAUNCH_DATE
-      // }
-      // if (this.model.DISTRIBUTOR.FMS_FUNDTYPE_ID != null) {
-      //   data4 = this.model.DISTRIBUTOR.FMS_FUNDTYPE_ID
-      // }
-      // if (this.model.FUND_CATEGORY.FMS_FUNDCATEGORY_ID != null) {
-      //   data5 = this.model.FUND_CATEGORY.FMS_FUNDCATEGORY_ID
-      // }
-      // if (this.model.DISTRIBUTOR.DISTRIBUTOR_ID != null) {
-      //   data6 = this.model.DISTRIBUTOR.DISTRIBUTOR_ID
+      if (this.model.LAUNCH_DATE != null) {
+        data3 = moment(this.model.LAUNCH_DATE).format('YYYY-MM-DD') ?? ''
+      }
+      if (this.model.DISTRIBUTOR.FMS_FUNDTYPE_ID != null) {
+        data4 = this.model.DISTRIBUTOR.FMS_FUNDTYPE_ID
+      }
+      if (this.model.FUND_CATEGORY.FMS_FUNDCATEGORY_ID != null) {
+        data5 = this.model.FUND_CATEGORY.FMS_FUNDCATEGORY_ID
+      }
+      // if (this.model.FUND_SCHEME.FMS_SCHEME_ID != null) {
+      //   data6 = this.model.FUND_SCHEME.FMS_SCHEME_ID
       // }
       // if (this.model.DISTRIBUTOR.DISTRIBUTOR_ID != null) {
       //   data7 = this.model.DISTRIBUTOR.DISTRIBUTOR_ID
@@ -338,6 +339,9 @@ export default {
       // if (this.model.DISTRIBUTOR.DISTRIBUTOR_ID != null) {
       //   data8 = this.model.DISTRIBUTOR.DISTRIBUTOR_ID
       // }
+      if (this.model.FUND_SCHEME.FMS_SCHEME_ID != null) {
+        data9 = this.model.FUND_SCHEME.FMS_SCHEME_ID
+      }
 
       // const data2 = this.model.FUND_NAME
       // const data3 = this.model.LAUNCH_DATE
@@ -383,15 +387,16 @@ export default {
     },
     resetValue: async function () {
       console.log('clear data input')
-      this.model.DISTRIBUTOR = null
-      this.model.LAUNCH_DATE = null
-      this.model.FUND_NAME = null
-      this.model.FUND_TYPE = null
-      this.model.FUND_CATEGORY = null
-      this.model.SHARIAHCOMPLIANT = null
-      this.model.SRIESGFUND = null
-      this.model.EPFMIS = null
-      this.model.SCHEME_STRUCTURE = null
+      this.model.DISTRIBUTOR = ''
+      this.model.LAUNCH_DATE = ''
+      this.model.FUND_NAME = ''
+      this.model.FUND_TYPE = ''
+      this.model.FUND_CATEGORY = ''
+      this.model.SHARIAHCOMPLIANT = ''
+      this.model.SRIESGFUND = ''
+      this.model.EPFMIS = ''
+      this.model.SCHEME_STRUCTURE = ''
+      this.fundDetails = []
     },
     onModelUpdated (newVal, schema) {
       if (schema === 'DISTRIBUTOR') {
