@@ -317,11 +317,11 @@ export default {
       if (this.model.DISTRIBUTOR.DISTRIBUTOR_ID != null) {
         data = this.model.DISTRIBUTOR.DISTRIBUTOR_ID
       }
-      if (this.model.LAUNCH_DATE != null) {
-        data2 = this.model.LAUNCH_DATE
+      if (this.model.FUND_NAME != null) {
+        data2 = this.model.FUND_NAME
       }
-      if (this.model.FUND_TYPE.LAUNCH_DATE != null) {
-        data3 = this.model.FUND_TYPE.LAUNCH_DATE
+      if (this.model.LAUNCH_DATE != null) {
+        data3 = this.model.LAUNCH_DATE
       }
       if (this.model.DISTRIBUTOR.FMS_FUNDTYPE_ID != null) {
         data4 = this.model.DISTRIBUTOR.FMS_FUNDTYPE_ID
@@ -382,17 +382,19 @@ export default {
       console.log(this.FundSchemeList)
     },
     resetValue: async function () {
-      this.model.DISTRIBUTOR.DISTRIBUTOR_ID = null
+      console.log('clear data input')
+      this.model.DISTRIBUTOR = null
       this.model.LAUNCH_DATE = null
-      this.model.FUND_TYPE.LAUNCH_DATE = null
-      this.model.DISTRIBUTOR.FMS_FUNDTYPE_ID = null
-      this.model.FUND_CATEGORY.FMS_FUNDCATEGORY_ID = null
+      this.model.FUND_NAME = null
+      this.model.FUND_TYPE = null
+      // this.model.DISTRIBUTOR.FMS_FUNDTYPE_ID = null
+      // this.model.FUND_CATEGORY.FMS_FUNDCATEGORY_ID = null
     },
     onModelUpdated (newVal, schema) {
       if (schema === 'DISTRIBUTOR') {
         this.model.FUND_NAME = ''
         console.log(this.model.DISTRIBUTOR.DISTRIBUTOR_ID)
-        this.getFundProfileFilterData(this.model.DISTRIBUTOR.DISTRIBUTOR_ID)
+        // this.getFundProfileFilterData(this.model.DISTRIBUTOR.DISTRIBUTOR_ID)
       }
     },
   },
