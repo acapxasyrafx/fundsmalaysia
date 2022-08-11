@@ -57,16 +57,22 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr v-for="data in details" :key="data.FUND_PROFILE_ID">
+                      <tr v-for="data in fundDetails" :key="data.FUND_PROFILE_ID">
                         <td>{{data.FUND_NAME}}</td>
                         <td>{{data.DISTRIBUTOR_NAME}}</td>
-                        <td>{{data.FUND_STATUS}}</td>
+                        <td>{{data.TS_PARAM}}</td>
                         <td>{{data.FUND_DATE_LAUNCH}}</td>
-                        <td>{{data.FUND_TYPE}}</td>
-                        <td>{{data.FUND_CATEGORY}}</td>
-                        <td>{{data.FUND_SYARIAH_COMP}}</td>
-                        <td>{{data.EPF-MIS}}</td>
-                        <td>{{data.SCHEME_STRUCTURE}}</td>
+                        <td>{{data.FUND_TYPE_FULLNAME}}</td>
+                        <td>{{data.GROUP_ASSET}}</td>
+                        <td>
+                          <div v-if="data.FUND_SYARIAH_COMP == 1">YES</div>
+                          <div v-if="data.FUND_SYARIAH_COMP == 2">NO</div>
+                        </td>
+                        <td>
+                          <div v-if="data.FUND_STATUS_EPF == 1">YES</div>
+                          <div v-if="data.FUND_STATUS_EPF == 2">NO</div>
+                        </td>
+                        <td>{{data.FMS_SCHEME_NAME}}</td>
                       </tr>
                     </tbody>
                   </table>
@@ -113,7 +119,7 @@ export default {
       count: 1,
 
       distributor: [],
-      fund: [],
+      fundDetails: [],
       details: [],
 
       FundTypeList: [],
@@ -285,26 +291,52 @@ export default {
     // }, 400),
     onSearch: async function () {
       var data = null
+      var data2 = null
+      var data3 = null
+      var data4 = null
+      var data5 = null
+      var data6 = null
+      var data7 = null
+      var data8 = null
+      var data9 = null
       if (this.model.DISTRIBUTOR.DISTRIBUTOR_ID != null) {
         data = this.model.DISTRIBUTOR.DISTRIBUTOR_ID
       }
-      const data2 = this.model.FUND_NAME
-      const data3 = this.model.LAUNCH_DATE
-      const data4 = this.model.FUND_TYPE.FMS_FUNDTYPE_ID
-      const data5 = this.model.FUND_CATEGORY.FMS_FUNDCATEGORY_ID
+      if (this.model.LAUNCH_DATE != null) {
+        data2 = this.model.LAUNCH_DATE
+      }
+      // if (this.model.FUND_TYPE.FMS_FUNDTYPE_ID != null) {
+      //   data3 = this.model.FUND_TYPE.FMS_FUNDTYPE_ID
+      // }
+      // if (this.model.DISTRIBUTOR.DISTRIBUTOR_ID != null) {
+      //   data4 = this.model.DISTRIBUTOR.DISTRIBUTOR_ID
+      // }
+      // if (this.model.DISTRIBUTOR.DISTRIBUTOR_ID != null) {
+      //   data5 = this.model.DISTRIBUTOR.DISTRIBUTOR_ID
+      // }
+      // if (this.model.DISTRIBUTOR.DISTRIBUTOR_ID != null) {
+      //   data6 = this.model.DISTRIBUTOR.DISTRIBUTOR_ID
+      // }
+      // if (this.model.DISTRIBUTOR.DISTRIBUTOR_ID != null) {
+      //   data7 = this.model.DISTRIBUTOR.DISTRIBUTOR_ID
+      // }
+      // if (this.model.DISTRIBUTOR.DISTRIBUTOR_ID != null) {
+      //   data8 = this.model.DISTRIBUTOR.DISTRIBUTOR_ID
+      // }
+
+      // const data2 = this.model.FUND_NAME
+      // const data3 = this.model.LAUNCH_DATE
+      // const data4 = this.model.FUND_TYPE.FMS_FUNDTYPE_ID
+      // const data5 = this.model.FUND_CATEGORY.FMS_FUNDCATEGORY_ID
       // const data6 = this.model.SHARIAHCOMPLIANT.value
       // const data7 = this.model.SRIESGFUND.value
       // const data8 = this.model.EPFMIS.value
       // const data9 = this.model.SCHEME_STRUCTURE.
-      const data6 = null
-      const data7 = null
-      const data8 = null
-      const data9 = null
       try {
         const response = await servicesModule1.fundDetailsMediaAdvanced(data, data2, data3, data4, data5, data6, data7, data8, data9)
-        console.log('before in var : ', this.details)
-        this.details = response
-        console.log('after in var : ', this.details)
+        console.log('before in var : ', this.fundDetails)
+        this.fundDetails = response
+        console.log('after in var : ', this.fundDetails)
         this.displayTable = 1
       } catch (error) {
         console.log(error)
