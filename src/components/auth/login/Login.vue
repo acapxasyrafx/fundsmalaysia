@@ -153,70 +153,71 @@ export default {
         return
       }
 
-      try {
-        const data = {
-          username: this.email,
-          password: this.password,
-        }
-        // this.showOverlay(true)
-        console.log('start verify')
-        const response = await services01Module5.verifyMediaUser(data)
-        this.$router.push({
-          name: 'media-recover-password',
-          params: { USER_ID: response.data.USER_ID },
-        })
-        // console.log(response.data.TP_USER_TYPE);
-        if (response.data.errorCode === 4010) {
-          this.$router.push({ name: 'page_under_maintenance_media' })
-          return
-        }
-        if (response.data.errorCode === 4003) {
-          this.errors = [response.data.message]
-        } else if (typeof response.data.ISLOGIN !== 'undefined') {
-          if (response.data.ISLOGIN === 0 || response.data.ISLOGIN == null || response.data.ISLOGIN === undefined) {
-            console.log('New User')
-            localStorage.setItem('recover-password', response.data.USER_ID)
-            this.$router.push({
-              name: 'media-recover-password',
-              params: { USER_ID: response.data.USER_ID },
-            })
-            // this.showOverlay(false)
-          } else if (response.data.ISLOGIN === 1) {
-            console.log('other else here 1')
-            console.log('User Media')
-            console.log(JSON.stringify(response.data))
-            services01Module5.setUser(JSON.stringify(response.data))
-            this.$store.commit('change', JSON.stringify(response.data))
-            console.log('user store :' + localStorage.getItem('user'))
-            Vue.$toast.open({
-              message: 'You have successfully logged in.',
-              type: 'success',
-              position: 'top',
-            })
-            this.$router.push({ name: 'dashboard' })
-            console.log('first')
-            // this.showOverlay(false)
-          }
-        } else {
-          console.log('Wrong User')
-          // this.showOverlay(false)
+      this.$router.push({ name: 'dashboard' })
+      // try {
+      //   const data = {
+      //     username: this.email,
+      //     password: this.password,
+      //   }
+      //   // this.showOverlay(true)
+      //   console.log('start verify')
+      //   const response = await services01Module5.verifyMediaUser(data)
+      //   this.$router.push({
+      //     name: 'media-recover-password',
+      //     params: { USER_ID: response.data.USER_ID },
+      //   })
+      //   // console.log(response.data.TP_USER_TYPE);
+      //   if (response.data.errorCode === 4010) {
+      //     this.$router.push({ name: 'page_under_maintenance_media' })
+      //     return
+      //   }
+      //   if (response.data.errorCode === 4003) {
+      //     this.errors = [response.data.message]
+      //   } else if (typeof response.data.ISLOGIN !== 'undefined') {
+      //     if (response.data.ISLOGIN === 0 || response.data.ISLOGIN == null || response.data.ISLOGIN === undefined) {
+      //       console.log('New User')
+      //       localStorage.setItem('recover-password', response.data.USER_ID)
+      //       this.$router.push({
+      //         name: 'media-recover-password',
+      //         params: { USER_ID: response.data.USER_ID },
+      //       })
+      //       // this.showOverlay(false)
+      //     } else if (response.data.ISLOGIN === 1) {
+      //       console.log('other else here 1')
+      //       console.log('User Media')
+      //       console.log(JSON.stringify(response.data))
+      //       services01Module5.setUser(JSON.stringify(response.data))
+      //       this.$store.commit('change', JSON.stringify(response.data))
+      //       console.log('user store :' + localStorage.getItem('user'))
+      //       Vue.$toast.open({
+      //         message: 'You have successfully logged in.',
+      //         type: 'success',
+      //         position: 'top',
+      //       })
+      //       this.$router.push({ name: 'dashboard' })
+      //       console.log('first')
+      //       // this.showOverlay(false)
+      //     }
+      //   } else {
+      //     console.log('Wrong User')
+      //     // this.showOverlay(false)
 
-          Vue.$toast.open({
-            message: 'Unknown user',
-            type: 'error',
-            position: 'top',
-          })
-        }
-      } catch (error) {
-        console.log('Error log : ', error)
-        // this.showOverlay(false)
+      //     Vue.$toast.open({
+      //       message: 'Unknown user',
+      //       type: 'error',
+      //       position: 'top',
+      //     })
+      //   }
+      // } catch (error) {
+      //   console.log('Error log : ', error)
+      //   // this.showOverlay(false)
 
-        Vue.$toast.open({
-          message: 'Wrong email or password',
-          type: 'error',
-          position: 'top',
-        })
-      }
+      //   Vue.$toast.open({
+      //     message: 'Wrong email or password',
+      //     type: 'error',
+      //     position: 'top',
+      //   })
+      // }
     },
 
     resetPassword: async function () {

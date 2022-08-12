@@ -227,6 +227,29 @@ export async function getLatestFund () {
     }
   })
 }
+export async function getLatestFundData () {
+  return axios.get(urlHost + '/api/module5/getLatestFundData').then(response => {
+    console.log('data : ' + JSON.stringify(response.data.data))
+    return response.data.data
+  }).catch(function (error) {
+    if (error.response) {
+      // The request was made and the server responded with a status code
+      // that falls out of the range of 2xx
+      if (error.response.status === 500) {
+        // console.log(JSON.stringify(error.response.data.message));
+        if (error.response.data.message.includes('Expired token')) {
+          // eslint-disable-next-line no-undef
+          services.logout()
+        } else {
+          console.log(error.response.data.message)
+        }
+      } else if (error.response.status === 401) {
+        // eslint-disable-next-line no-undef
+        services.logout()
+      }
+    }
+  })
+}
 
 export async function getFundProfileFilter (data) {
   return axios

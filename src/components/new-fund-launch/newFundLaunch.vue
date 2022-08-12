@@ -15,7 +15,7 @@
                       <h6 class="text-white mb-1">{{ navLists.DIST_NAME }}</h6>
                       <small> {{ navLists.CURRENCY_NAME }}</small>
                       <br/>
-                      <small>{{ navLists.NAV_CREATE_TIMESTAMP }}</small>
+                      <small>{{ navLists.FUND_DATE_LAUNCH }}</small>
                     </div>
                   </div>
                 </div>
@@ -243,7 +243,7 @@ export default {
 
     async filterNAV () {
       try {
-        const response = await servicesModule1.getNAVlistMedia(
+        const response = await servicesModule1.getLatestFundData(
           this.model.modelFilter,
         )
         if (response !== 'error') {
@@ -252,7 +252,7 @@ export default {
       } catch (error) {}
     },
     getNAVlist: async function () {
-      const response = await servicesModule1.getNAVlistMedia()
+      const response = await servicesModule1.getLatestFundData()
       this.navListRecordList = response
       this.navListRecordCount = this.navListRecordList.length
     },
