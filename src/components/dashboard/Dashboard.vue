@@ -15,43 +15,6 @@
           </div>
         </div>
       </div>
-      <div class="conatiner px-lg-5">
-        <div class="row g-5">
-          <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
-            <div class="section-title position-relative mb-4 pb-2">
-              <h6 class="position-relative text-primary ps-4">
-                New Fund Launch
-              </h6>
-            </div>
-
-          </div>
-        </div>
-        <div class="">
-          <div class="bg-primary testimonial py-5 my-5 fadeInUp">
-            <div >
-              <carousel :autoplay="true">
-                <slide v-for="navLists in navListRecordList" :key="navLists.FUND_PROFILE_ID">
-                  <div>
-                    <div class="testimonial-item bg-transparent border rounded text-white p-4">
-                      <p>{{ navLists.FUND_NAME }}</p>
-                      <div class="d-flex align-items-center">
-                        <div class="ps-3">
-                          <h6 class="text-white mb-1">{{ navLists.DIST_NAME }}</h6>
-                          <small> {{ navLists.CURRENCY_NAME }}</small>
-                          <br/>
-                          <small>{{ navLists.FUND_DATE_LAUNCH }}</small>
-                        </div>
-                      </div>
-                    </div>
-                    <br/>
-                  </div>
-                </slide>
-              </carousel>
-
-            </div>
-          </div>
-        </div>
-      </div>
       <div class="container px-lg-5">
         <div class="row g-5">
           <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
@@ -262,6 +225,43 @@
           </div>
           <div class="col-lg-6">
             <img class="img-fluid wow zoomIn" data-wow-delay="0.5s" src="./img/about.jpg">
+          </div>
+        </div>
+      </div>
+      <div class="conatiner px-lg-5">
+        <div class="row g-5">
+          <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
+            <div class="section-title position-relative mb-4 pb-2">
+              <h6 class="position-relative text-primary ps-4">
+                New Fund Launch
+              </h6>
+            </div>
+
+          </div>
+        </div>
+        <div class="">
+          <div class="bg-primary testimonial py-5 my-5 fadeInUp">
+            <div >
+              <carousel :autoplay="true">
+                <slide v-for="navLists in navListRecordList" :key="navLists.FUND_PROFILE_ID">
+                  <div>
+                    <div class="testimonial-item bg-transparent border rounded text-white p-4">
+                      <p>{{ navLists.FUND_NAME }}</p>
+                      <div class="d-flex align-items-center">
+                        <div class="ps-3">
+                          <h6 class="text-white mb-1">{{ navLists.DIST_NAME }}</h6>
+                          <small> {{ navLists.CURRENCY_NAME }}</small>
+                          <br/>
+                          <small>{{ navLists.FUND_DATE_LAUNCH }}</small>
+                        </div>
+                      </div>
+                    </div>
+                    <br/>
+                  </div>
+                </slide>
+              </carousel>
+
+            </div>
           </div>
         </div>
       </div>
