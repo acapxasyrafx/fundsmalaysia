@@ -173,6 +173,13 @@ export default {
       model: {
         FUND_NAME: '',
         DISTRIBUTOR: '',
+        LAUNCH_DATE: '',
+        FUND_TYPE: [],
+        FUND_CATEGORY: [],
+        FUND_SCHEME: [],
+        SHARIAHCOMPLIANT: '',
+        SRIESGFUND: '',
+        EPFMIS: '',
       },
 
       Schema: {
@@ -390,12 +397,12 @@ export default {
       this.model.DISTRIBUTOR = ''
       this.model.LAUNCH_DATE = ''
       this.model.FUND_NAME = ''
-      this.model.FUND_TYPE = ''
-      this.model.FUND_CATEGORY = ''
+      this.model.FUND_TYPE = []
+      this.model.FUND_CATEGORY = []
       this.model.SHARIAHCOMPLIANT = ''
       this.model.SRIESGFUND = ''
       this.model.EPFMIS = ''
-      this.model.FUND_SCHEME = ''
+      this.model.FUND_SCHEME = []
     },
     onModelUpdated (newVal, schema) {
       if (schema === 'DISTRIBUTOR') {
