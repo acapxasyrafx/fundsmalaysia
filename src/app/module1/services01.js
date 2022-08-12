@@ -18,6 +18,8 @@ export function logout () {
 
 var urlHost = 'https://lfcs-dev.fimm.com.my'
 
+// var urlHost = 'http://localhost:8080'
+
 //* ***********************************************User************************************************************** */
 export async function getAllUser () {
   return axios.get(urlHost + '/api/module5/get_user_list').then(response => {
