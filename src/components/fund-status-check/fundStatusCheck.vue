@@ -52,6 +52,7 @@
                         <th>FUND TYPE</th>
                         <th>FUND CATEGORY</th>
                         <th>SHARIAH COMPLIANT</th>
+                        <th>SRI/ESG FUND</th>
                         <th>EPF-MIS</th>
                         <th>SCHEME STRUCTURE</th>
                       </tr>
@@ -78,6 +79,11 @@
                           <div v-if="data.FUND_SYARIAH_COMP == 1">YES</div>
                           <div v-if="data.FUND_SYARIAH_COMP == 2">NO</div>
                           <div v-if="data.FUND_SYARIAH_COMP == null">-</div>
+                        </td>
+                        <td>
+                          <div v-if="data.FUND_STATUS_SRI_ESG == 1">YES</div>
+                          <div v-if="data.FUND_STATUS_SRI_ESG == 2">NO</div>
+                          <div v-if="data.FUND_STATUS_SRI_ESG == null">-</div>
                         </td>
                         <td>
                           <div v-if="data.FUND_STATUS_EPF == 1">YES</div>
