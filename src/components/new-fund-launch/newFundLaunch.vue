@@ -6,7 +6,7 @@
       <div class="container">
         <div class="row">
           <div class="col-sm">
-            <div class="owl-carousel testimonial-carousel">
+            <div class="">
               <div v-for="navLists in navListRecordList" :key="navLists.FUND_PROFILE_ID">
                 <div class="testimonial-item bg-transparent border rounded text-white p-4">
                   <p>{{ navLists.FUND_NAME }}</p>

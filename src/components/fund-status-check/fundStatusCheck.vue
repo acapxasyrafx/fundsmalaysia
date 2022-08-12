@@ -316,31 +316,31 @@ export default {
       var data8 = null
       var data9 = null
       if (this.model.DISTRIBUTOR.DISTRIBUTOR_ID != null) {
-        data = this.model.DISTRIBUTOR.DISTRIBUTOR_ID
+        data = this.model.DISTRIBUTOR.DISTRIBUTOR_ID ?? ''
       }
       if (this.model.FUND_NAME != null) {
-        data2 = this.model.FUND_NAME
+        data2 = this.model.FUND_NAME ?? ''
       }
       if (this.model.LAUNCH_DATE != null) {
         data3 = moment(this.model.LAUNCH_DATE).format('YYYY-MM-DD') ?? ''
       }
-      if (this.model.DISTRIBUTOR.FMS_FUNDTYPE_ID != null) {
-        data4 = this.model.DISTRIBUTOR.FMS_FUNDTYPE_ID
+      if (this.model.FUND_TYPE != null) {
+        data4 = this.model.FUND_TYPE.FMS_FUNDTYPE_ID ?? ''
       }
-      if (this.model.FUND_CATEGORY.FMS_FUNDCATEGORY_ID != null) {
-        data5 = this.model.FUND_CATEGORY.FMS_FUNDCATEGORY_ID
+      if (this.model.FUND_CATEGORY != null) {
+        data5 = this.model.FUND_CATEGORY.FMS_FUNDCATEGORY_ID ?? ''
       }
-      // if (this.model.FUND_SCHEME.FMS_SCHEME_ID != null) {
-      //   data6 = this.model.FUND_SCHEME.FMS_SCHEME_ID
-      // }
-      // if (this.model.DISTRIBUTOR.DISTRIBUTOR_ID != null) {
-      //   data7 = this.model.DISTRIBUTOR.DISTRIBUTOR_ID
-      // }
-      // if (this.model.DISTRIBUTOR.DISTRIBUTOR_ID != null) {
-      //   data8 = this.model.DISTRIBUTOR.DISTRIBUTOR_ID
-      // }
-      if (this.model.FUND_SCHEME.FMS_SCHEME_ID != null) {
-        data9 = this.model.FUND_SCHEME.FMS_SCHEME_ID
+      if (this.model.SHARIAHCOMPLIANT != null) {
+        data6 = this.model.SHARIAHCOMPLIANT
+      }
+      if (this.model.SRIESGFUND != null) {
+        data7 = this.model.SRIESGFUND
+      }
+      if (this.model.EPFMIS != null) {
+        data8 = this.model.EPFMIS
+      }
+      if (this.model.FUND_SCHEME != null) {
+        data9 = this.model.FUND_SCHEME.FMS_SCHEME_ID ?? ''
       }
 
       // const data2 = this.model.FUND_NAME
@@ -395,8 +395,7 @@ export default {
       this.model.SHARIAHCOMPLIANT = ''
       this.model.SRIESGFUND = ''
       this.model.EPFMIS = ''
-      this.model.SCHEME_STRUCTURE = ''
-      this.fundDetails = []
+      this.model.FUND_SCHEME = ''
     },
     onModelUpdated (newVal, schema) {
       if (schema === 'DISTRIBUTOR') {
