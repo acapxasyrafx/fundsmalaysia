@@ -61,8 +61,6 @@ import 'bootstrap'
 
 
 import axios from 'axios'
-import NProgress from 'nprogress'
-import 'nprogress/nprogress.css'
 
 Vue.component('field-vfg-custom-input', VfgCustomInput)
 Vue.component('field-vfg-custom-Tacinput', VfgCustomTacInput)
@@ -113,7 +111,7 @@ router.beforeEach((to, from, next) => {
 })
 
 router.afterEach((to, from) => {
-  store.commit('setLoading', false)
+  store.commit('setLoading', true)
 })
 
 /* eslint-disable no-new */
