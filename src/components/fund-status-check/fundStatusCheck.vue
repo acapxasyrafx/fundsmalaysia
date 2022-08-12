@@ -76,17 +76,17 @@
                           <div v-if="data.GROUP_ASSET == null">-</div>
                         </td>
                         <td>
-                          <div v-if="data.FUND_SYARIAH_COMP == 1">YES</div>
+                          <div v-if="data.FUND_SYARIAH_COMP == 1 || data.FUND_SYARIAH_COMP != 2">YES</div>
                           <div v-if="data.FUND_SYARIAH_COMP == 2">NO</div>
                           <div v-if="data.FUND_SYARIAH_COMP == null">-</div>
                         </td>
                         <td>
-                          <div v-if="data.FUND_STATUS_SRI_ESG == 1">YES</div>
+                          <div v-if="data.FUND_STATUS_SRI_ESG == 1 || data.FUND_STATUS_SRI_ESG != 2">YES</div>
                           <div v-if="data.FUND_STATUS_SRI_ESG == 2">NO</div>
                           <div v-if="data.FUND_STATUS_SRI_ESG == null">-</div>
                         </td>
                         <td>
-                          <div v-if="data.FUND_STATUS_EPF == 1">YES</div>
+                          <div v-if="data.FUND_STATUS_EPF == 1 || data.FUND_STATUS_EPF != 2">YES</div>
                           <div v-if="data.FUND_STATUS_EPF == 2">NO</div>
                           <div v-if="data.FUND_STATUS_EPF == null">-</div>
                         </td>
