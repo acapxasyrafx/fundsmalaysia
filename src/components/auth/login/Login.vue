@@ -153,7 +153,7 @@ export default {
         return
       }
 
-      this.$router.push({ name: 'dashboard' })
+      this.$router.push({ name: 'dashboard-auth' })
       // try {
       //   const data = {
       //     username: this.email,

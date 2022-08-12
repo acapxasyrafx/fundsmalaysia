@@ -16,9 +16,9 @@ export function logout () {
   localStorage.removeItem('realmName')
 }
 
-var urlHost = 'https://lfcs-dev.fimm.com.my'
+// var urlHost = 'https://lfcs-dev.fimm.com.my'
 
-// var urlHost = 'http://localhost:8080'
+var urlHost = 'http://localhost:8080'
 
 //* ***********************************************User************************************************************** */
 export async function getAllUser () {

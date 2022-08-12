@@ -2,8 +2,8 @@
 import axios from 'axios'
 import Vue from 'vue'
 
-var urlHost = 'https://lfcs-dev.fimm.com.my'
-// var urlHost = 'http://localhost:8080'
+// var urlHost = 'https://lfcs-dev.fimm.com.my'
+var urlHost = 'http://localhost:8080'
 //* ******************* Authorization ********************/
 export function header () {
   return axios.defaults.headers.common.Authorization =
@@ -465,4 +465,30 @@ export async function updatePassword (data) {
       return 'error'
     }
   })
+}
+
+export async function getDistributorDetail (data) {
+  return axios
+    .get(urlHost + '/api/module5/getDistributorDetail', {
+      params: {
+        DISTRIBUTOR_ID: data,
+      },
+    })
+    .then((response) => {
+      console.log('data :' + JSON.stringify(response.data.data))
+      return response.data.data
+    })
+    .catch(function (error) {
+      if (error.response) {
+        Vue.$toast.open({
+          message: error.response.data.message,
+          type: 'error',
+        })
+        if (error.response.status === 401) {
+          logout()
+        } else {
+          return 'error'
+        }
+      }
+    })
 }

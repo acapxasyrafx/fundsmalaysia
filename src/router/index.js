@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import AuthLayout from '../components/auth/AuthLayout'
 import AppLayout from '../components/admin/AppLayout'
+import AppAuthLayout from '../components/admin/AppAuthLayout'
 import AuthLayoutOthersRecoverPass from '../components/auth/AuthLayoutRecoverPassword'
 import * as services from '../app/module0/services'
 
@@ -161,7 +162,77 @@ export default new Router({
         // }
       },
     },
+    /* ---------------ADMIN PAGES--------------------- */
+    {
+      name: 'Admin',
+      path: '/auth-verify',
+      component: AppAuthLayout,
+      //   beforeEnter(to, from, next) {
+      //     if (!services.isLoggedIn()) {
+      //        console.log("not login");
+      //        next("dashboard");
+      //     } else {
+      //        next("login");
+      //     }
+      // },
+      children: [{
+        name: 'dashboard-auth',
+        path: 'dashboard-auth',
+        component: () =>
+          import('../components/dashboard/Dashboard.vue'),
+        default: true,
+      },
+      {
+        name: 'fundStatusCheck-auth',
+        path: 'fundStatusCheck-auth',
+        component: () =>
+          import('../components/fund-status-check/fundStatusCheck.vue'),
+      },
+      {
+        name: 'management-company-dir-auth',
+        path: 'management-company-dir-auth',
+        component: () =>
+          import('../components/management-company-directory/Media_Management_Company_Directory.vue'),
+      },
+      {
+        name: 'nav-auth',
+        path: 'nav-auth',
+        component: () =>
+          import('../components/nav-page/Media_Nav_Page.vue'),
+      },
+      {
+        name: 'myProfile-auth',
+        path: 'myProfile-auth',
+        component: () =>
+          import('../components/profile/Media_User_Profile.vue'),
+      },
+      {
+        name: 'newFundLaunch-auth',
+        path: 'newFundLaunch-auth',
+        component: () =>
+          import('../components/new-fund-launch/newFundLaunch.vue'),
+      },
+      {
+        name: 'aboutUs-auth',
+        path: 'aboutUs-auth',
+        component: () =>
+          import('../components/about-us/aboutUs.vue'),
+      },
+      {
+        name: 'ui',
+        path: 'ui',
+        component: EmptyParentComponent,
+        children: [{
+          name: 'colors',
+          path: 'colors',
+          component: () =>
+            import('../components/ui/colors/Colors'),
+        },
 
+        ],
+      },
+      ],
+    },
     {
       path: '/auth-media-recover',
       component: AuthLayoutOthersRecoverPass,
