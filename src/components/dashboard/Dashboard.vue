@@ -15,34 +15,68 @@
           </div>
         </div>
       </div>
-    </div>
-    <div>
-      <div class="container-xxl py-5">
-        <div class="container px-lg-5">
-          <div class="row g-5">
-            <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
-              <div class="section-title position-relative mb-4 pb-2">
-                <h6 class="position-relative text-primary ps-4">Fund Status Check</h6>
-              </div>
-              <div class="row g-6">
-                <div class="col-sm-12">
+      <div class="conatiner px-lg-5">
+        <div class="row g-5">
+          <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
+            <div class="section-title position-relative mb-4 pb-2">
+              <h6 class="position-relative text-primary ps-4">
+                New Fund Launch
+              </h6>
+            </div>
+
+          </div>
+        </div>
+        <div class="">
+          <div class="bg-primary testimonial py-5 my-5 fadeInUp">
+            <div >
+              <carousel :autoplay="true">
+                <slide v-for="navLists in navListRecordList" :key="navLists.FUND_PROFILE_ID">
                   <div>
-                    <vue-form-generator
-                      :model="model"
-                      :schema="Schema"
-                      :options="formOptions"
-                      ref="advancedSearchForm"
-                      @model-updated="onModelUpdated"
-                    >
-                    </vue-form-generator>
-                    <br />
-                    <button
-                      @click="onSearch"
-                      type="button"
-                      class="ml-2 btn btn-sm btn-primary"
-                    >
-                      Search
-                    </button>
+                    <div class="testimonial-item bg-transparent border rounded text-white p-4">
+                      <p>{{ navLists.FUND_NAME }}</p>
+                      <div class="d-flex align-items-center">
+                        <div class="ps-3">
+                          <h6 class="text-black mb-1">{{ navLists.DIST_NAME }}</h6>
+                          <small> {{ navLists.CURRENCY_NAME }}</small>
+                          <br/>
+                          <small>{{ navLists.FUND_DATE_LAUNCH }}</small>
+                        </div>
+                      </div>
+                    </div>
+                    <br/>
+                  </div>
+                </slide>
+              </carousel>
+
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="container px-lg-5">
+        <div class="row g-5">
+          <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
+            <div class="section-title position-relative mb-4 pb-2">
+              <h6 class="position-relative text-primary ps-4">Fund Status Check</h6>
+            </div>
+            <div class="row g-6">
+              <div class="col-sm-12">
+                <div>
+                  <vue-form-generator
+                    :model="model"
+                    :schema="Schema"
+                    :options="formOptions"
+                    ref="advancedSearchForm"
+                    @model-updated="onModelUpdated"
+                  >
+                  </vue-form-generator>
+                  <br />
+                  <button
+                    @click="onSearch"
+                    type="button"
+                    class="ml-2 btn btn-sm btn-primary"
+                  >
+                    Search
+                  </button>
                   <!-- <button
                     @click="reset"
                     type="button"
@@ -50,185 +84,184 @@
                   >
                     Reset
                   </button> -->
+                </div>
+                <va-separator />
+                <div>
+                  <div class="col">
+                    <div class="row mb-1">
+                      <span class="description col-4">STATUS : </span>
+                      <span class="description col">
+                        <div>
+                          {{ this.details.TS_PARAM }}
+                        </div>
+                      </span>
+                    </div>
                   </div>
-                  <va-separator />
-                  <div>
-                    <div class="col">
-                      <div class="row mb-1">
-                        <span class="description col-4">STATUS : </span>
-                        <span class="description col">
-                          <div>
-                            {{ this.details.TS_PARAM }}
-                          </div>
-                        </span>
-                      </div>
+                  <br/>
+                  <div class="col">
+                    <div class="row mb-1">
+                      <span class="description col-4">LAUNCH DATE : </span>
+                      <span class="description col">
+                        <div>
+                          {{ details.FUND_DATE_LAUNCH }}
+                        </div>
+                      </span>
                     </div>
-                    <br/>
-                    <div class="col">
-                      <div class="row mb-1">
-                        <span class="description col-4">LAUNCH DATE : </span>
-                        <span class="description col">
-                          <div>
-                            {{ details.FUND_DATE_LAUNCH }}
-                          </div>
-                        </span>
-                      </div>
+                  </div>
+                  <br/>
+                  <div class="col">
+                    <div class="row mb-1">
+                      <span class="description col-4">FUND TYPE : </span>
+                      <span class="description col">
+                        <div
+                          v-if="
+                            details.FUND_TYPE_FULLNAME != null &&
+                              details.FUND_TYPE_FULLNAME != ''
+                          "
+                        >
+                          {{ details.FUND_TYPE_FULLNAME }}
+                        </div>
+                        <div
+                          v-else-if="
+                            details.FUND_TYPE_FULLNAME == null ||
+                              details.FUND_TYPE_FULLNAME == ''
+                          "
+                        >
+                          -
+                        </div>
+                      </span>
                     </div>
-                    <br/>
-                    <div class="col">
-                      <div class="row mb-1">
-                        <span class="description col-4">FUND TYPE : </span>
-                        <span class="description col">
-                          <div
-                            v-if="
-                              details.FUND_TYPE_FULLNAME != null &&
-                                details.FUND_TYPE_FULLNAME != ''
-                            "
-                          >
-                            {{ details.FUND_TYPE_FULLNAME }}
-                          </div>
-                          <div
-                            v-else-if="
-                              details.FUND_TYPE_FULLNAME == null ||
-                                details.FUND_TYPE_FULLNAME == ''
-                            "
-                          >
-                            -
-                          </div>
-                        </span>
-                      </div>
+                  </div>
+                  <br/>
+                  <div class="col">
+                    <div class="row mb-1">
+                      <span class="description col-4">FUND CATEGORY : </span>
+                      <span class="description col">
+                        <div
+                          v-if="
+                            details.GROUP_ASSET != null &&
+                              details.GROUP_ASSET != ''
+                          "
+                        >
+                          {{ details.GROUP_ASSET }}
+                        </div>
+                        <div
+                          v-else-if="
+                            details.GROUP_ASSET == null ||
+                              details.GROUP_ASSET == ''
+                          "
+                        >
+                          -
+                        </div>
+                      </span>
                     </div>
-                    <br/>
-                    <div class="col">
-                      <div class="row mb-1">
-                        <span class="description col-4">FUND CATEGORY : </span>
-                        <span class="description col">
-                          <div
-                            v-if="
-                              details.GROUP_ASSET != null &&
-                                details.GROUP_ASSET != ''
-                            "
-                          >
-                            {{ details.GROUP_ASSET }}
-                          </div>
-                          <div
-                            v-else-if="
-                              details.GROUP_ASSET == null ||
-                                details.GROUP_ASSET == ''
-                            "
-                          >
-                            -
-                          </div>
-                        </span>
-                      </div>
+                  </div>
+                  <br/>
+                  <div class="col">
+                    <div class="row mb-1">
+                      <span class="description col-4">SHARIAH COMPLIANT : </span>
+                      <span class="description col">
+                        <div v-if="details.FUND_SYARIAH_COMP == 1">Yes</div>
+                        <div v-if="details.FUND_SYARIAH_COMP == 2">No</div>
+                        <div
+                          v-else-if="
+                            details.FUND_SYARIAH_COMP == null ||
+                              details.FUND_SYARIAH_COMP == ''
+                          "
+                        >
+                          -
+                        </div>
+                      </span>
                     </div>
-                    <br/>
-                    <div class="col">
-                      <div class="row mb-1">
-                        <span class="description col-4">SHARIAH COMPLIANT : </span>
-                        <span class="description col">
-                          <div v-if="details.FUND_SYARIAH_COMP == 1">Yes</div>
-                          <div v-if="details.FUND_SYARIAH_COMP == 2">No</div>
-                          <div
-                            v-else-if="
-                              details.FUND_SYARIAH_COMP == null ||
-                                details.FUND_SYARIAH_COMP == ''
-                            "
-                          >
-                            -
-                          </div>
-                        </span>
-                      </div>
+                  </div>
+                  <br/>
+                  <div class="col">
+                    <div class="row mb-1">
+                      <span class="description col-4">SRI/ESG FUND : </span>
+                      <span class="description col">
+                        <div v-if="details.FUND_ASEAN_CIS_STATUS == 1">Yes</div>
+                        <div v-if="details.FUND_ASEAN_CIS_STATUS == 2">No</div>
+                        <div
+                          v-else-if="
+                            details.FUND_ASEAN_CIS_STATUS == null ||
+                              details.FUND_ASEAN_CIS_STATUS == ''
+                          "
+                        >
+                          -
+                        </div>
+                      </span>
                     </div>
-                    <br/>
-                    <div class="col">
-                      <div class="row mb-1">
-                        <span class="description col-4">SRI/ESG FUND : </span>
-                        <span class="description col">
-                          <div v-if="details.FUND_ASEAN_CIS_STATUS == 1">Yes</div>
-                          <div v-if="details.FUND_ASEAN_CIS_STATUS == 2">No</div>
-                          <div
-                            v-else-if="
-                              details.FUND_ASEAN_CIS_STATUS == null ||
-                                details.FUND_ASEAN_CIS_STATUS == ''
-                            "
-                          >
-                            -
-                          </div>
-                        </span>
-                      </div>
+                  </div>
+                  <br/>
+                  <div class="col">
+                    <div class="row mb-1">
+                      <span class="description col-4">EPF-MIS : </span>
+                      <span class="description col">
+                        <div v-if="details.FUND_STATUS_EPF == 1">Yes</div>
+                        <div v-if="details.FUND_STATUS_EPF == 2">No</div>
+                        <div
+                          v-else-if="
+                            details.FUND_STATUS_EPF == null ||
+                              details.FUND_STATUS_EPF == ''
+                          "
+                        >
+                          -
+                        </div>
+                      </span>
                     </div>
-                    <br/>
-                    <div class="col">
-                      <div class="row mb-1">
-                        <span class="description col-4">EPF-MIS : </span>
-                        <span class="description col">
-                          <div v-if="details.FUND_STATUS_EPF == 1">Yes</div>
-                          <div v-if="details.FUND_STATUS_EPF == 2">No</div>
-                          <div
-                            v-else-if="
-                              details.FUND_STATUS_EPF == null ||
-                                details.FUND_STATUS_EPF == ''
-                            "
-                          >
-                            -
-                          </div>
-                        </span>
-                      </div>
+                  </div>
+                  <br/>
+                  <div class="col">
+                    <div class="row mb-1">
+                      <span class="description col-4">SCHEME STRUCTURE : </span>
+                      <span class="description col">
+                        <div
+                          v-if="
+                            details.FUND_SCHEME != null &&
+                              details.FUND_SCHEME != ''
+                          "
+                        >
+                          {{ details.FMS_SCHEME_NAME }}
+                        </div>
+                        <div
+                          v-else-if="
+                            details.FUND_SCHEME == null ||
+                              details.FUND_SCHEME == ''
+                          "
+                        >
+                          -
+                        </div>
+                      </span>
                     </div>
-                    <br/>
-                    <div class="col">
-                      <div class="row mb-1">
-                        <span class="description col-4">SCHEME STRUCTURE : </span>
-                        <span class="description col">
-                          <div
-                            v-if="
-                              details.FUND_SCHEME != null &&
-                                details.FUND_SCHEME != ''
-                            "
+                  </div>
+                  <br/>
+                  <div class="col">
+                    <div class="row mb-1">
+                      <span class="description col-4">NAV : </span>
+                      <span class="description col">
+                        <div>
+                          <b-table
+                            bordered
+                            :head-variant="'light'"
+                            :items="items"
+                            :fields="fields"
+                            show-empty
                           >
-                            {{ details.FMS_SCHEME_NAME }}
-                          </div>
-                          <div
-                            v-else-if="
-                              details.FUND_SCHEME == null ||
-                                details.FUND_SCHEME == ''
-                            "
-                          >
-                            -
-                          </div>
-                        </span>
-                      </div>
-                    </div>
-                    <br/>
-                    <div class="col">
-                      <div class="row mb-1">
-                        <span class="description col-4">NAV : </span>
-                        <span class="description col">
-                          <div>
-                            <b-table
-                              bordered
-                              :head-variant="'light'"
-                              :items="items"
-                              :fields="fields"
-                              show-empty
-                            >
-                              <template #empty="scope"> No Data Found </template>
-                            </b-table>
-                          </div>
-                        </span>
-                      </div>
+                            <template #empty="scope"> No Data Found </template>
+                          </b-table>
+                        </div>
+                      </span>
                     </div>
                   </div>
                 </div>
               </div>
-              <div class="d-flex align-items-center mt-4">
+            </div>
+            <div class="d-flex align-items-center mt-4">
 
-              </div>
             </div>
-            <div class="col-lg-6">
-              <img class="img-fluid wow zoomIn" data-wow-delay="0.5s" src="./img/about.jpg">
-            </div>
+          </div>
+          <div class="col-lg-6">
+            <img class="img-fluid wow zoomIn" data-wow-delay="0.5s" src="./img/about.jpg">
           </div>
         </div>
       </div>
@@ -239,11 +272,17 @@
 <script>
 import axios from 'axios'
 import * as servicesModule1 from '../../app/module1/services'
+import { Carousel, Slide } from 'vue-carousel'
 
 export default {
   name: 'dashboard',
   mounted () {
     this.getDistributorMedia()
+    this.getLatestFund()
+  },
+  components: {
+    Carousel,
+    Slide,
   },
   data () {
     return {
@@ -375,8 +414,8 @@ export default {
         }
       } catch (error) {}
     },
-    getNAVlist: async function () {
-      const response = await servicesModule1.getNAVlistMedia()
+    getLatestFund: async function () {
+      const response = await servicesModule1.getLatestFund()
       this.navListRecordList = response
       this.navListRecordCount = this.navListRecordList.length
     },
