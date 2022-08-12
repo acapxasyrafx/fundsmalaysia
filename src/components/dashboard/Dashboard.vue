@@ -36,7 +36,7 @@
                       <p>{{ navLists.FUND_NAME }}</p>
                       <div class="d-flex align-items-center">
                         <div class="ps-3">
-                          <h6 class="text-black mb-1">{{ navLists.DIST_NAME }}</h6>
+                          <h6 class="text-white mb-1">{{ navLists.DIST_NAME }}</h6>
                           <small> {{ navLists.CURRENCY_NAME }}</small>
                           <br/>
                           <small>{{ navLists.FUND_DATE_LAUNCH }}</small>
